@@ -1,6 +1,10 @@
 # kikyoyoyo.github.io
 
-Personal website (GitHub Pages). Static HTML/CSS; content mirrors [cccccz.github.io](http://cccccz.github.io/).
+Personal website (GitHub Pages). Static HTML/CSS.
+
+## Cache busting (CSS updates)
+
+Browsers may cache `styles.css`. After you change the stylesheet, bump the `?v=` query on the `<link rel="stylesheet" href="styles.css?v=…">` line in `index.html` and `blog.html` so returning visitors fetch the new file without a hard refresh.
 
 ## Local preview
 

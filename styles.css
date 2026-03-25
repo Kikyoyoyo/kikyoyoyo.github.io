@@ -30,6 +30,38 @@ body {
   margin-right: auto;
 }
 
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  align-items: center;
+  margin: -0.5rem 0 1.75rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 1rem;
+}
+
+.nav-link {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+.nav-link--current {
+  color: var(--text);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.blog-placeholder {
+  margin: 0;
+  color: var(--muted);
+}
+
 .site-header {
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
