@@ -1,21 +1,32 @@
 # kikyoyoyo.github.io
 
-Personal website (GitHub Pages). Static HTML/CSS.
+Personal site: **React** + **Vite** + **Tailwind**, Markdown blog, deployed with **GitHub Actions** to **GitHub Pages**.
 
-## Cache busting (CSS updates)
+See **`plan.md`** for goals and scope, and **`dev.md`** for local dev, posts, Umami, and deployment.
 
-Browsers may cache `styles.css`. After you change the stylesheet, bump the `?v=` query on the `<link rel="stylesheet" href="styles.css?v=…">` line in `index.html` and `blog.html` so returning visitors fetch the new file without a hard refresh.
-
-## Local preview
-
-Open `index.html` in a browser, or run a local server:
+## Quick start
 
 ```bash
-python3 -m http.server 8080
+npm ci
+npm run dev
 ```
 
-Then visit `http://localhost:8080`.
+```bash
+npm run build
+npm run preview
+```
 
-## GitHub Pages
+## Blog posts
 
-Repository name `username.github.io` serves the site at `https://username.github.io/`. Push the `main` (or `master`) branch; in the repo **Settings → Pages**, set the source to the default branch and `/` (root).
+Add `*.md` under `src/content/posts/` with YAML front matter (`title`, `date`, `category`, `tags`). See `dev.md`.
+
+## Deploy
+
+The workflow `.github/workflows/deploy.yml` runs on pushes to **`main`**.
+
+1. Repository **Settings → Pages**: set source to **GitHub Actions** (not “Deploy from a branch” for this setup).
+2. Optional: **Settings → Secrets and variables → Actions** — add `VITE_UMAMI_WEBSITE_ID` and `VITE_UMAMI_SCRIPT_URL` for Umami (see `dev.md`).
+
+## License
+
+Personal content — all rights reserved unless stated otherwise.
