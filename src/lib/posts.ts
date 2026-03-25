@@ -1,5 +1,6 @@
 import matter from "gray-matter";
 import type { Post } from "../types/post";
+import { normalizePostDate } from "./normalizeDate";
 
 const rawModules = import.meta.glob<string>("../content/posts/*.md", {
   query: "?raw",
@@ -15,7 +16,7 @@ function parsePosts(): Post[] {
     const fileSlug = path.split("/").pop()?.replace(/\.md$/i, "") ?? "";
     const slug = (data.slug as string) || fileSlug;
     const title = data.title as string | undefined;
-    const date = data.date as string | undefined;
+    const date = normalizePostDate(data.date);
     const category = (data.category as string) || "uncategorized";
     const tags = Array.isArray(data.tags) ? (data.tags as string[]) : [];
     const description = data.description as string | undefined;

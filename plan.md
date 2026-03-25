@@ -19,7 +19,7 @@
 | **Projects** | Placeholder-friendly; expandable later. |
 | **Badminton** | Placeholder-friendly; expandable later. |
 
-**Markdown source**: files under `src/content/posts/*.md`, committed to Git.
+**Markdown source**: files under `src/content/posts/*.md`, committed to Git. Front matter dates are normalized to strings (YAML may parse bare `YYYY-MM-DD` as `Date`, which React cannot render).
 
 ## Visual & UX
 

@@ -38,14 +38,16 @@ Add a file under `src/content/posts/` with front matter:
 ```yaml
 ---
 title: "Your title"
-date: 2025-03-25
+date: "2025-03-25"
 category: quant
 tags: [markets, notes]
 description: "Optional one-line summary for lists."
 ---
+```
+
+**Date field:** Unquoted `date: 2025-03-25` is parsed by YAML as a JavaScript `Date`. The app normalizes that to `YYYY-MM-DD` strings for display, but quoting the date (`"2025-03-25"`) is also fine and avoids ambiguity.
 
 Write in **Markdown**. Use GFM tables, lists, code blocks, etc.
-```
 
 - **Filename** should be unique, e.g. `2025-03-25-my-note.md` (slug can be derived from filename or title — implementation uses filename stem as slug unless specified otherwise).
 - Rebuild / redeploy to publish.
