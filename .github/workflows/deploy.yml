@@ -10,9 +10,10 @@ permissions:
   pages: write
   id-token: write
 
+# Do not cancel in-flight deploys: can leave Pages without a valid artifact (404 "Site not found").
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -25,6 +26,9 @@ jobs:
           node-version: "20"
           cache: npm
 
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
       - name: Install dependencies
         run: npm ci
 
@@ -34,7 +38,8 @@ jobs:
           VITE_UMAMI_SCRIPT_URL: ${{ secrets.VITE_UMAMI_SCRIPT_URL }}
         run: npm run build
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 

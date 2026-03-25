@@ -87,9 +87,10 @@ If these are **unset**, the site builds and runs **without** Umami (no broken re
 
 | Issue | Hint |
 |-------|------|
-| Blank page on Pages | Check Actions log; confirm `homepage` / `base` in Vite matches repo type. |
-| 404 on refresh | SPA fallback: GitHub Pages needs `404.html` = `index.html` or hash routing — we add `404.html` copy in `public/` or CI step for GH Pages. |
-| Styles missing | Confirm `tailwind` content paths include `index.html` and `./src/**/*`. |
+| **`https://<user>.github.io/` shows GitHub’s “Site not found”** (not your app) while Actions is green | Often **Pages + Actions mis-sync**. Ensure **Settings → Pages → Build and deployment** uses **GitHub Actions** (not “Deploy from a branch” pointing at an empty `main` / root). Re-save if needed. This workflow runs **`actions/configure-pages`** before upload so the Pages site is registered. If you still see the generic GitHub 404, open the latest **Deploy to GitHub Pages** run and confirm the **deploy** job completed; then wait a few minutes for CDN. |
+| Blank page on Pages | Check Actions log; confirm `homepage` / `base` in Vite matches repo type (`/` for `username.github.io`). |
+| 404 on refresh inside the SPA | `npm run build` copies `index.html` → `404.html` for client-side routes. |
+| Styles missing | Confirm Tailwind content paths include `index.html` and `./src/**/*`. |
 
 ## Repo layout (after migration)
 
