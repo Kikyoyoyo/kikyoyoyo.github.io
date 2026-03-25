@@ -93,6 +93,7 @@ If these are **unset**, the site builds and runs **without** Umami (no broken re
 | Blank page on Pages | Check Actions log; confirm `homepage` / `base` in Vite matches repo type (`/` for `username.github.io`). |
 | 404 on refresh inside the SPA | `npm run build` copies `index.html` → `404.html` for client-side routes. |
 | Styles missing | Confirm Tailwind content paths include `index.html` and `./src/**/*`. |
+| **`Can't find variable: Buffer`** / `Buffer is not defined` (often Safari) | **gray-matter** used Node’s `Buffer` in the browser bundle. Front matter is parsed with **`yaml`** and a `---` … `---` splitter in `src/lib/frontMatter.ts` instead — no polyfill. |
 
 ## Repo layout (after migration)
 

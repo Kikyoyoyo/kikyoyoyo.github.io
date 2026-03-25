@@ -1,5 +1,5 @@
-import matter from "gray-matter";
 import type { Post } from "../types/post";
+import { splitFrontMatter } from "./frontMatter";
 import { normalizePostDate } from "./normalizeDate";
 
 const rawModules = import.meta.glob<string>("../content/posts/*.md", {
@@ -12,7 +12,7 @@ function parsePosts(): Post[] {
   const posts: Post[] = [];
   for (const path of Object.keys(rawModules)) {
     const raw = rawModules[path];
-    const { data, content } = matter(raw);
+    const { data, body } = splitFrontMatter(raw);
     const fileSlug = path.split("/").pop()?.replace(/\.md$/i, "") ?? "";
     const slug = (data.slug as string) || fileSlug;
     const title = data.title as string | undefined;
@@ -28,7 +28,7 @@ function parsePosts(): Post[] {
       category,
       tags,
       description,
-      body: content.trim(),
+      body,
     });
   }
   posts.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));

@@ -33,7 +33,7 @@
 - **React** + **Vite** + **TypeScript**.
 - **Tailwind CSS** with custom color tokens (Mizuno-like palette).
 - **react-router-dom** for routing.
-- **react-markdown** + **remark-gfm** for post body; **gray-matter** for front matter.
+- **react-markdown** + **remark-gfm** for post body; **`yaml`** + a small front-matter splitter (no Node `Buffer`; works in all browsers).
 - **fuse.js** for in-browser search over a build-time JSON index (or fused at runtime from loaded posts).
 - **Build & deploy**: **GitHub Actions** builds and publishes **`dist/`** to GitHub Pages (artifact or `peaceiris/actions-gh-pages`); no requirement to build only locally.
 
