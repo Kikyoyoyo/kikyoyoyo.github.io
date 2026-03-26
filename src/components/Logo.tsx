@@ -12,10 +12,11 @@ export function Logo({ className = "" }: LogoProps) {
       role="img"
       aria-hidden="true"
     >
-      <rect width="32" height="32" rx="6" className="fill-mizuno-100 dark:fill-mizuno-800" />
+      {/* Sharp tile + bold geometric K (Mizuno-like: flat shapes, no soft marketing curves) */}
+      <rect width="32" height="32" rx="2" className="fill-white dark:fill-mizuno-800" />
       <path
         className="fill-mizuno-600 dark:fill-mizuno-200"
-        d="M8 24V8h3.2l6.4 9.6L24 8h3.2v16H24V13.6l-5.6 8.4h-1.6L11.2 13.6V24H8z"
+        d="M7 24V8h4.2l5.8 8.7L22.8 8H27v16h-4V14.2l-6.2 9.3h-2.1L8.2 14.2V24H7z"
       />
     </svg>
   );

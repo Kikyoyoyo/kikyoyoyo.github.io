@@ -17,6 +17,19 @@ A workflow in `.github/workflows/` runs on GitHub’s servers when you push. Our
 
 You see pass/fail under the **Actions** tab.
 
+## Design tokens (Mizuno-inspired)
+
+Tailwind theme colors live in `src/index.css` under `@theme` (`mizuno-*`).
+
+| Token | Role |
+|--------|------|
+| `mizuno-50`–`100` | Page / panel backgrounds (cool off-white) |
+| `mizuno-600` | **Primary brand blue** — anchored to Mizuno’s deep blue **#001489** (links, logo fill, key accents) |
+| `mizuno-700`–`800` | Hover / borders / dark-mode surfaces |
+| `mizuno-900` | Body text (light mode) and dark chrome (dark mode) |
+
+**Logo / favicon** (`src/components/Logo.tsx`, `public/favicon.svg`): white tile, small radius, bold geometric **K** — same *flat, athletic* graphic language as Mizuno’s mark (sharp angles, no gradients). Do not copy Mizuno’s RunBird or wordmark; keep a distinct **K**.
+
 ## Local development
 
 ```bash
