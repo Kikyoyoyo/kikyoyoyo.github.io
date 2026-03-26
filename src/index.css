@@ -1,15 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* Mizuno-inspired: cool blue + off-white, no violet */
+  /*
+   * Mizuno-inspired blue + white (no violet).
+   * Brand anchor: official Mizuno blue ≈ #001489 (RunBird / wordmark).
+   * Scale: lighter tints for surfaces; 600 = primary brand; 900 = ink / dark chrome.
+   */
   --color-mizuno-50: #f4f8fc;
   --color-mizuno-100: #e8f0f8;
   --color-mizuno-200: #c5d8ec;
   --color-mizuno-300: #9ebfd9;
-  --color-mizuno-400: #6b94b8;
-  --color-mizuno-600: #0057a3;
-  --color-mizuno-700: #004682;
-  --color-mizuno-800: #003560;
+  --color-mizuno-400: #4a7ab0;
+  --color-mizuno-600: #001489;
+  --color-mizuno-700: #001170;
+  --color-mizuno-800: #002a5c;
   --color-mizuno-900: #0a1628;
   --font-serif: Georgia, "Times New Roman", Times, serif;
   --font-sans: ui-sans-serif, system-ui, sans-serif;

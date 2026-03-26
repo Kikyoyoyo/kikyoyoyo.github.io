@@ -24,6 +24,10 @@
 ## Visual & UX
 
 - **Aesthetic**: Minimal academic; **Mizuno-inspired blue + white** (no violet-heavy Tailwind defaults).
+- **Mizuno color & logo language (reference, not a trademark copy)**:
+  - **Primary blue** aligns with the brand’s well-known deep blue (commonly cited as **#001489**), used for links, focus rings, and the mark—not mid “sky” blues.
+  - **Neutrals**: cool off-whites (`mizuno-50`–`100`) and deep navy (`mizuno-900`) for dark chrome; keep plenty of **white space** like retail/sport packaging.
+  - **Mark style**: Mizuno’s identity is **flat, geometric, high-contrast** (wordmark + RunBird). Our **blue “K”** follows that: **sharp tile** (small corner radius), **bold strokes**, no gradients or soft illustrative curves—distinct from the RunBird shape but the same *graphic discipline*.
 - **Theme**: **System** dark/light via `prefers-color-scheme`; if unavailable, **light**.
 - **Nav**: Sticky top bar: Home, Blog, Archive, Projects, Badminton; **site search** entry (client-side index over post metadata + body text).
 - **Logo**: Blue “K” (SVG), favicon aligned with same mark.
