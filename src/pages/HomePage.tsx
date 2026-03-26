@@ -40,7 +40,7 @@ export function HomePage() {
           </li>
           <li>
             <Link
-              to="/badminton"
+              to="/fun"
               className="text-mizuno-700 underline underline-offset-2 hover:text-mizuno-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
             >
               Fun

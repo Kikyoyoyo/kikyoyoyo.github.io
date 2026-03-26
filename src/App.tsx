@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { HomePage } from "./pages/HomePage";
 import { BlogPage } from "./pages/BlogPage";
@@ -7,7 +7,9 @@ import { ArchivePage } from "./pages/ArchivePage";
 import { CategoryPage } from "./pages/CategoryPage";
 import { TagPage } from "./pages/TagPage";
 import { ProjectsPage } from "./pages/ProjectsPage";
-import { BadmintonPage } from "./pages/BadmintonPage";
+import { FunPage } from "./pages/FunPage";
+import { GamesPage } from "./pages/GamesPage";
+import { GomokuPage } from "./pages/GomokuPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
 export function App() {
@@ -21,7 +23,10 @@ export function App() {
         <Route path="/blog/tag/:tagSlug" element={<TagPage />} />
         <Route path="/blog/:slug" element={<PostPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/badminton" element={<BadmintonPage />} />
+        <Route path="/fun" element={<FunPage />} />
+        <Route path="/fun/games" element={<GamesPage />} />
+        <Route path="/fun/games/gomoku" element={<GomokuPage />} />
+        <Route path="/badminton" element={<Navigate to="/fun" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Layout>

@@ -47,7 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <NavLink to="/projects" className={navLinkClass}>
                 Projects
               </NavLink>
-              <NavLink to="/badminton" className={navLinkClass}>
+              <NavLink to="/fun" className={navLinkClass}>
                 Fun
               </NavLink>
               <button
