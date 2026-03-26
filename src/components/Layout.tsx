@@ -6,10 +6,10 @@ import { UmamiScript } from "./Umami";
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   [
-    "rounded px-2 py-1 font-sans text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600",
+    "rounded px-2 py-1 font-sans text-sm text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
     isActive
-      ? "bg-mizuno-200 font-semibold text-mizuno-900 dark:bg-mizuno-700 dark:text-mizuno-50"
-      : "text-mizuno-800 hover:bg-mizuno-100 dark:text-mizuno-100 dark:hover:bg-mizuno-800",
+      ? "bg-white/20 font-semibold text-white"
+      : "hover:bg-white/10",
   ].join(" ");
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -25,13 +25,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         Skip to main content
       </a>
       <div className="min-h-screen flex flex-col">
-        <header className="sticky top-0 z-40 border-b border-mizuno-200 bg-mizuno-50/95 backdrop-blur dark:border-mizuno-700 dark:bg-mizuno-900/95">
+        <header className="sticky top-0 z-40 border-b border-mizuno-700 bg-mizuno-600 dark:border-mizuno-700 dark:bg-mizuno-800">
           <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-3 px-4 py-3">
             <Link
               to="/"
-              className="flex items-center gap-2 font-sans text-lg font-semibold text-mizuno-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-50"
+              className="flex items-center gap-2 font-sans text-lg font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              <Logo />
+              <Logo variant="onBrand" />
               <span>Zheng Chen</span>
             </Link>
             <nav aria-label="Primary" className="flex flex-wrap items-center gap-1">
@@ -52,7 +52,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </NavLink>
               <button
                 type="button"
-                className="rounded px-2 py-1 font-sans text-sm text-mizuno-800 hover:bg-mizuno-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-100 dark:hover:bg-mizuno-800"
+                className="rounded px-2 py-1 font-sans text-sm text-white/90 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 onClick={() => setSearchOpen(true)}
                 aria-expanded={searchOpen}
                 aria-controls="site-search-input"

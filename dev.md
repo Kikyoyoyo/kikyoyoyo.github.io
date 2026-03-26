@@ -74,6 +74,11 @@ If these are **unset**, the site builds and runs **without** Umami (no broken re
 
 **Privacy note**: Tell visitors you use analytics if your jurisdiction or employer requires it; Umami is lighter than many alternatives but policies are your responsibility.
 
+## Layout & header
+
+- **Body**: `bg-white` in light mode (not off-white) so the page reads as clean white; dark mode uses `mizuno-900`.
+- **Header**: Full-width **`mizuno-600`** bar with white/light nav links; **`Logo variant="onBrand"`** = white tile + `mizuno-600` K so the mark matches the brand blue on the bar. Dark mode header uses **`mizuno-800`** for a deeper navy strip.
+
 ## Accessibility (AA)
 
 - Keep focus styles visible (Tailwind `focus-visible:` rings).
