@@ -43,7 +43,7 @@ function GomokuBoardSurface({
   return (
     <div className="relative block w-max max-w-none md:w-full">
       <div
-        className="relative z-0 inline-grid w-max gap-0.5 rounded border border-mizuno-300 bg-amber-100/80 p-1 [grid-template-columns:repeat(19,minmax(2.5rem,2.5rem))] dark:border-mizuno-600 dark:bg-mizuno-950/80 md:w-full md:max-w-full md:[grid-template-columns:repeat(19,minmax(0,1fr))]"
+        className="relative z-0 inline-grid w-max gap-0 rounded-lg border border-stone-300/80 bg-stone-200/90 p-0.5 shadow-sm [grid-template-columns:repeat(19,minmax(2.5rem,2.5rem))] dark:border-stone-600/70 dark:bg-neutral-900/95 md:w-full md:max-w-full md:[grid-template-columns:repeat(19,minmax(0,1fr))]"
         role="grid"
         aria-label="Gomoku board 19 by 19"
       >
@@ -53,10 +53,10 @@ function GomokuBoardSurface({
               key={`${r}-${c}`}
               type="button"
               className={[
-                "flex size-10 shrink-0 touch-manipulation items-center justify-center rounded-sm border border-mizuno-200/90 bg-amber-50 text-xs font-medium dark:border-mizuno-700 dark:bg-mizuno-900/90",
+                "flex size-10 shrink-0 touch-manipulation items-center justify-center border border-stone-300/35 bg-stone-100 text-xs font-medium dark:border-stone-600/35 dark:bg-neutral-800/90",
                 "md:size-auto md:h-auto md:w-full md:min-h-0 md:aspect-square",
                 cell === 0
-                  ? "hover:bg-amber-100 active:bg-amber-200 dark:hover:bg-mizuno-800 dark:active:bg-mizuno-800"
+                  ? "hover:bg-stone-200/90 active:bg-stone-200 dark:hover:bg-neutral-700/80 dark:active:bg-neutral-700"
                   : "cursor-default",
               ].join(" ")}
               aria-label={
@@ -71,12 +71,12 @@ function GomokuBoardSurface({
             >
               {cell === 1 ? (
                 <span
-                  className="size-7 rounded-full bg-zinc-900 shadow-inner md:size-5"
+                  className="size-7 rounded-full bg-neutral-900 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] ring-1 ring-black/15 md:size-5 dark:ring-white/20"
                   aria-hidden
                 />
               ) : cell === 2 ? (
                 <span
-                  className="size-7 rounded-full border border-zinc-400 bg-white shadow-inner md:size-5"
+                  className="size-7 rounded-full border border-stone-400/50 bg-stone-50 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.05)] md:size-5 dark:border-stone-500/70 dark:bg-stone-100"
                   aria-hidden
                 />
               ) : null}
@@ -96,7 +96,7 @@ function GomokuBoardSurface({
             y1={winningLineCells[0].row + 0.5}
             x2={winningLineCells[4].col + 0.5}
             y2={winningLineCells[4].row + 0.5}
-            stroke="#dc2626"
+            stroke="#b45309"
             strokeWidth={0.12}
             strokeLinecap="round"
             strokeLinejoin="round"
