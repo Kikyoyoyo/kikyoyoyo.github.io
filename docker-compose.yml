@@ -1,0 +1,20 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      # 源码挂载到容器，改代码宿主机与容器同步
+      - .:/app
+      # 依赖放在命名卷里，避免与宿主机 node_modules 冲突
+      - kikyoyoyo_node_modules:/app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      # Docker Desktop（尤其 Windows）下文件监听有时需要轮询
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
+
+volumes:
+  kikyoyoyo_node_modules:

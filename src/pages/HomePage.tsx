@@ -10,9 +10,10 @@ export function HomePage() {
         Zheng Chen
       </h1>
       <p className="mb-8 text-mizuno-800 dark:text-mizuno-200">
-        Hi, I am Zheng Chen, Jack — a math &amp; CS enjoyer, badminton enthusiast, art enjoyer, philosophy reader, and
-        most importantly, a genuine friend. Hon. BSc. Computer Science Specialist &amp; Math Major, University of
-        Toronto. 2025–2026: quant development and quant research.
+        Hon. BSc. Computer Science Specialist &amp; Math Major, University of
+        Toronto. Currently doing quant development and quant research.</p>
+      <p className="mb-8 text-mizuno-800 dark:text-mizuno-200">I am a math &amp; CS enjoyer, badminton enthusiast, art enjoyer, philosophy reader, and
+        most importantly, a genuine friend.
       </p>
 
       <section aria-labelledby="explore-heading" className="mb-10">
@@ -62,27 +63,25 @@ export function HomePage() {
             </span>
           </li>
           <li>
-            GitHub:{" "}
-            <a
+            GitHub:{" "
+              < a
               href="https://github.com/Kikyoyoyo/"
-              className="text-mizuno-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
+            className="text-mizuno-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
             >
-              github.com/Kikyoyoyo
-            </a>
-          </li>
-          <li>
-            HuggingFace:{" "}
-            <a
-              href="https://huggingface.co/kikyoyoyo/"
-              className="text-mizuno-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
-            >
-              huggingface.co/kikyoyoyo
-            </a>
-          </li>
-          <li>Phone: +1 365 993 0207</li>
-          <li>Phone: +86 135 0189 6430</li>
-        </ul>
-      </section>
-    </article>
+            github.com/Kikyoyoyo
+          </a>
+        </li>
+        <li>
+          HuggingFace:{" "}
+          <a
+            href="https://huggingface.co/kikyoyoyo/"
+            className="text-mizuno-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
+          >
+            huggingface.co/kikyoyoyo
+          </a>
+        </li>
+      </ul>
+    </section>
+    </article >
   );
 }
