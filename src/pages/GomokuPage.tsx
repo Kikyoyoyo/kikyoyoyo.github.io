@@ -28,6 +28,7 @@ function playerLabel(p: Player): string {
 type GomokuBoardSurfaceProps = {
   board: Cell[][];
   winningLineCells: { row: number; col: number }[] | null;
+  lastMove: { row: number; col: number } | null;
   winner: Player | null;
   draw: boolean;
   onCellClick: (row: number, col: number) => void;
@@ -36,6 +37,7 @@ type GomokuBoardSurfaceProps = {
 function GomokuBoardSurface({
   board,
   winningLineCells,
+  lastMove,
   winner,
   draw,
   onCellClick,
@@ -48,7 +50,10 @@ function GomokuBoardSurface({
         aria-label="Gomoku board 19 by 19"
       >
         {board.map((row, r) =>
-          row.map((cell: Cell, c) => (
+          row.map((cell: Cell, c) => {
+            const isLastMove = lastMove?.row === r && lastMove?.col === c;
+            const lastHint = isLastMove ? ", most recent move" : "";
+            return (
             <button
               key={`${r}-${c}`}
               type="button"
@@ -63,25 +68,42 @@ function GomokuBoardSurface({
                 cell === 0
                   ? `Empty cell row ${r + 1} column ${c + 1}`
                   : cell === 1
-                    ? `Black stone row ${r + 1} column ${c + 1}`
-                    : `White stone row ${r + 1} column ${c + 1}`
+                    ? `Black stone row ${r + 1} column ${c + 1}${lastHint}`
+                    : `White stone row ${r + 1} column ${c + 1}${lastHint}`
               }
               disabled={cell !== 0 || !!winner || draw}
               onClick={() => onCellClick(r, c)}
             >
               {cell === 1 ? (
-                <span
-                  className="size-7 rounded-full bg-neutral-900 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] ring-1 ring-black/15 md:size-5 dark:ring-white/20"
-                  aria-hidden
-                />
+                <span className="relative inline-flex items-center justify-center">
+                  <span
+                    className="size-7 rounded-full bg-neutral-900 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] ring-1 ring-black/15 md:size-5 dark:ring-white/20"
+                    aria-hidden
+                  />
+                  {isLastMove ? (
+                    <span
+                      className="pointer-events-none absolute left-1/2 top-[14%] z-10 size-2 -translate-x-1/2 rounded-full bg-red-600 shadow-sm ring-1 ring-red-200/90 dark:bg-red-500 dark:ring-red-900/60 md:size-1.5"
+                      aria-hidden
+                    />
+                  ) : null}
+                </span>
               ) : cell === 2 ? (
-                <span
-                  className="size-7 rounded-full border border-stone-400/50 bg-stone-50 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.05)] md:size-5 dark:border-stone-500/70 dark:bg-stone-100"
-                  aria-hidden
-                />
+                <span className="relative inline-flex items-center justify-center">
+                  <span
+                    className="size-7 rounded-full border border-stone-400/50 bg-stone-50 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.05)] md:size-5 dark:border-stone-500/70 dark:bg-stone-100"
+                    aria-hidden
+                  />
+                  {isLastMove ? (
+                    <span
+                      className="pointer-events-none absolute left-1/2 top-[14%] z-10 size-2 -translate-x-1/2 rounded-full bg-red-600 shadow-sm ring-1 ring-red-300/80 dark:bg-red-500 dark:ring-red-900/50 md:size-1.5"
+                      aria-hidden
+                    />
+                  ) : null}
+                </span>
               ) : null}
             </button>
-          )),
+            );
+          }),
         )}
       </div>
       {winningLineCells && winningLineCells.length >= 2 && (
@@ -137,6 +159,11 @@ export function GomokuPage() {
     return getWinningLineFiveCells(b, last.row, last.col, last.player);
   }, [winner, moves]);
 
+  const lastMove =
+    moves.length > 0
+      ? { row: moves[moves.length - 1].row, col: moves[moves.length - 1].col }
+      : null;
+
   const status = useMemo(() => {
     if (winner) return `${playerLabel(winner)} wins.`;
     if (draw) return "Draw — board is full.";
@@ -165,6 +192,7 @@ export function GomokuPage() {
     <GomokuBoardSurface
       board={board}
       winningLineCells={winningLineCells}
+      lastMove={lastMove}
       winner={winner}
       draw={draw}
       onCellClick={onCellClick}
