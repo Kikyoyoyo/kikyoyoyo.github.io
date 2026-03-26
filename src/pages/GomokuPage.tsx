@@ -1,6 +1,15 @@
-import { useCallback, useMemo, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+  type RefObject,
+} from "react";
 import { Link } from "react-router-dom";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { usePinchZoomBoard } from "../hooks/usePinchZoomBoard";
 import {
   BOARD_SIZE,
   type Cell,
@@ -16,8 +25,69 @@ function playerLabel(p: Player): string {
   return p === 1 ? "Black" : "White";
 }
 
+/** Keeps scroll area correct when `transform: scale` is applied (layout size ≠ visual size). */
+function GomokuBoardZoomShell({
+  scale,
+  pinchRef,
+  children,
+}: {
+  scale: number;
+  pinchRef: RefObject<HTMLDivElement | null>;
+  children: ReactNode;
+}) {
+  const [baseSize, setBaseSize] = useState({ w: 0, h: 0 });
+
+  useLayoutEffect(() => {
+    const el = pinchRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      const cr = entries[0]?.contentRect;
+      if (!cr) return;
+      setBaseSize({ w: cr.width, h: cr.height });
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [pinchRef]);
+
+  const w = baseSize.w * scale;
+  const h = baseSize.h * scale;
+
+  return (
+    <div
+      className="touch-pan-x overflow-hidden"
+      style={{
+        width: baseSize.w ? w : undefined,
+        height: baseSize.h ? h : undefined,
+      }}
+    >
+      <div
+        ref={pinchRef}
+        className="w-max touch-pan-x will-change-transform"
+        style={{
+          transform: `scale(${scale})`,
+          transformOrigin: "top left",
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export function GomokuPage() {
   useDocumentTitle("Gomoku — Zheng Chen");
+
+  const [pinchEnabled, setPinchEnabled] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767.98px)");
+    const sync = () => setPinchEnabled(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  const { scale, resetZoom, targetRef: pinchRef } =
+    usePinchZoomBoard(pinchEnabled);
 
   const [moves, setMoves] = useState<Move[]>([]);
 
@@ -86,7 +156,9 @@ export function GomokuPage() {
         horizontally, vertically, or diagonally wins.
       </p>
       <p className="mb-3 font-sans text-xs text-mizuno-600 md:hidden dark:text-mizuno-400">
-        On small screens, scroll sideways — each cell stays finger-sized.
+        On small screens, scroll sideways — each cell stays finger-sized. Pinch
+        with two fingers on the board to zoom the board only (not the whole
+        page).
       </p>
 
       <div className="mb-4 flex flex-wrap items-center gap-3">
@@ -113,72 +185,85 @@ export function GomokuPage() {
         >
           New game
         </button>
+        {pinchEnabled && (
+          <button
+            type="button"
+            onClick={resetZoom}
+            disabled={scale === 1}
+            className="min-h-[44px] touch-manipulation rounded border border-mizuno-400 bg-white px-3 py-1.5 font-sans text-sm text-mizuno-900 shadow-sm hover:bg-mizuno-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 disabled:cursor-not-allowed disabled:opacity-50 dark:border-mizuno-600 dark:bg-mizuno-900 dark:text-mizuno-50 dark:hover:bg-mizuno-800 md:min-h-0"
+            aria-label="Reset board zoom to 100 percent"
+          >
+            Reset zoom
+          </button>
+        )}
       </div>
 
       <div className="-mx-4 overflow-x-auto overscroll-x-contain px-4 pb-2 [-webkit-overflow-scrolling:touch] md:mx-0 md:px-0">
-        <div className="relative block w-max max-w-none md:w-full">
-          <div
-            className="relative z-0 inline-grid w-max gap-0.5 rounded border border-mizuno-300 bg-amber-100/80 p-1 [grid-template-columns:repeat(19,minmax(2.5rem,2.5rem))] dark:border-mizuno-600 dark:bg-mizuno-950/80 md:w-full md:max-w-full md:[grid-template-columns:repeat(19,minmax(0,1fr))]"
-            role="grid"
-            aria-label="Gomoku board 19 by 19"
-          >
-            {board.map((row, r) =>
-              row.map((cell: Cell, c) => (
-                <button
-                  key={`${r}-${c}`}
-                  type="button"
-                  className={[
-                    "flex size-10 shrink-0 touch-manipulation items-center justify-center rounded-sm border border-mizuno-200/90 bg-amber-50 text-xs font-medium dark:border-mizuno-700 dark:bg-mizuno-900/90",
-                    "md:size-auto md:h-auto md:w-full md:min-h-0 md:aspect-square",
-                    cell === 0
-                      ? "hover:bg-amber-100 active:bg-amber-200 dark:hover:bg-mizuno-800 dark:active:bg-mizuno-800"
-                      : "cursor-default",
-                  ].join(" ")}
-                  aria-label={
-                    cell === 0
-                      ? `Empty cell row ${r + 1} column ${c + 1}`
-                      : cell === 1
-                        ? `Black stone row ${r + 1} column ${c + 1}`
-                        : `White stone row ${r + 1} column ${c + 1}`
-                  }
-                  disabled={cell !== 0 || !!winner || draw}
-                  onClick={() => onCellClick(r, c)}
-                >
-                  {cell === 1 ? (
-                    <span
-                      className="size-7 rounded-full bg-zinc-900 shadow-inner md:size-5"
-                      aria-hidden
-                    />
-                  ) : cell === 2 ? (
-                    <span
-                      className="size-7 rounded-full border border-zinc-400 bg-white shadow-inner md:size-5"
-                      aria-hidden
-                    />
-                  ) : null}
-                </button>
-              )),
+        <GomokuBoardZoomShell scale={scale} pinchRef={pinchRef}>
+          <div className="relative block w-max max-w-none md:w-full">
+            <div
+              className="relative z-0 inline-grid w-max gap-0.5 rounded border border-mizuno-300 bg-amber-100/80 p-1 [grid-template-columns:repeat(19,minmax(2.5rem,2.5rem))] dark:border-mizuno-600 dark:bg-mizuno-950/80 md:w-full md:max-w-full md:[grid-template-columns:repeat(19,minmax(0,1fr))]"
+              role="grid"
+              aria-label="Gomoku board 19 by 19"
+            >
+              {board.map((row, r) =>
+                row.map((cell: Cell, c) => (
+                  <button
+                    key={`${r}-${c}`}
+                    type="button"
+                    className={[
+                      "flex size-10 shrink-0 touch-manipulation items-center justify-center rounded-sm border border-mizuno-200/90 bg-amber-50 text-xs font-medium dark:border-mizuno-700 dark:bg-mizuno-900/90",
+                      "md:size-auto md:h-auto md:w-full md:min-h-0 md:aspect-square",
+                      cell === 0
+                        ? "hover:bg-amber-100 active:bg-amber-200 dark:hover:bg-mizuno-800 dark:active:bg-mizuno-800"
+                        : "cursor-default",
+                    ].join(" ")}
+                    aria-label={
+                      cell === 0
+                        ? `Empty cell row ${r + 1} column ${c + 1}`
+                        : cell === 1
+                          ? `Black stone row ${r + 1} column ${c + 1}`
+                          : `White stone row ${r + 1} column ${c + 1}`
+                    }
+                    disabled={cell !== 0 || !!winner || draw}
+                    onClick={() => onCellClick(r, c)}
+                  >
+                    {cell === 1 ? (
+                      <span
+                        className="size-7 rounded-full bg-zinc-900 shadow-inner md:size-5"
+                        aria-hidden
+                      />
+                    ) : cell === 2 ? (
+                      <span
+                        className="size-7 rounded-full border border-zinc-400 bg-white shadow-inner md:size-5"
+                        aria-hidden
+                      />
+                    ) : null}
+                  </button>
+                )),
+              )}
+            </div>
+            {winningLineCells && winningLineCells.length >= 2 && (
+              <svg
+                className="pointer-events-none absolute inset-0 z-10 h-full w-full overflow-visible"
+                viewBox={`0 0 ${BOARD_SIZE} ${BOARD_SIZE}`}
+                preserveAspectRatio="none"
+                aria-hidden
+              >
+                <line
+                  x1={winningLineCells[0].col + 0.5}
+                  y1={winningLineCells[0].row + 0.5}
+                  x2={winningLineCells[4].col + 0.5}
+                  y2={winningLineCells[4].row + 0.5}
+                  stroke="#dc2626"
+                  strokeWidth={0.12}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             )}
           </div>
-          {winningLineCells && winningLineCells.length >= 2 && (
-            <svg
-              className="pointer-events-none absolute inset-0 z-10 h-full w-full overflow-visible"
-              viewBox={`0 0 ${BOARD_SIZE} ${BOARD_SIZE}`}
-              preserveAspectRatio="none"
-              aria-hidden
-            >
-              <line
-                x1={winningLineCells[0].col + 0.5}
-                y1={winningLineCells[0].row + 0.5}
-                x2={winningLineCells[4].col + 0.5}
-                y2={winningLineCells[4].row + 0.5}
-                stroke="#dc2626"
-                strokeWidth={0.12}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          )}
-        </div>
+        </GomokuBoardZoomShell>
       </div>
 
       <p className="mt-4 font-sans text-sm text-mizuno-600 dark:text-mizuno-400">

@@ -3,7 +3,7 @@
 ## Goals
 
 - **Primary**: English blog (Markdown) with thoughts, phenomena, lessons learned; quant-adjacent audience (friends, collaborators, researchers).
-- **Secondary**: Lightweight personal hub with **Projects** and **Fun** (badminton and misc.; route `/badminton`) pages (content grows over time).
+- **Secondary**: Lightweight personal hub with **Projects** and **Fun** (games, hobbies, misc.; base route **`/fun`**) — content grows over time.
 - **Not in scope**: Marketing-style SEO, Lighthouse score chasing.
 
 ## Content & information architecture
@@ -17,7 +17,7 @@
 | **Tags** | `/blog/tag/:slug` — posts filtered by tag. |
 | **Archive** | `/blog/archive` — posts grouped by month (YYYY-MM) for “what did I write when”. |
 | **Projects** | Placeholder-friendly; expandable later. |
-| **Fun** (`/badminton`) | Placeholder-friendly; expandable later (badminton, hobbies, etc.). |
+| **Fun** (`/fun`) | Hub with links to Games and other fun areas. **`/fun/games`** lists games; **`/fun/games/gomoku`** is local two-player Gomoku (19×19), undo, win line, mobile-friendly board, optional board-only pinch zoom. Legacy **`/badminton`** redirects to `/fun`. |
 
 **Markdown source**: files under `src/content/posts/*.md`, committed to Git. Front matter dates are normalized to strings (YAML may parse bare `YYYY-MM-DD` as `Date`, which React cannot render).
 
@@ -51,6 +51,7 @@
 - **Semantics**: one `h1` per page, landmarks (`header`, `nav`, `main`, `footer`), nav `aria-current` where appropriate.
 - **Images** (if added later): `alt` text.
 - **Motion**: respect `prefers-reduced-motion` for any animation added later.
+- **Fun / Gomoku**: Board pinch-zoom is disabled when `prefers-reduced-motion: reduce` (see `usePinchZoomBoard`).
 
 ## Analytics: Umami (optional)
 
@@ -63,8 +64,8 @@ See `dev.md` for wiring secrets and hosting notes.
 ## Phasing
 
 1. **M1 (this rollout)**: React app, Markdown blog, categories/tags/archive, search, sticky nav, theme, AA-oriented UI, GitHub Actions deploy, Umami hook (optional), `plan.md` / `dev.md`.
-2. **M2**: Flesh out Projects / Fun; more posts; RSS if desired.
-3. **M3+**: Comments (e.g. Giscus), richer project entries, analytics tuning.
+2. **M2**: Flesh out Projects / Fun; more posts; RSS if desired. **Fun** now includes a **Games** section with **Gomoku** (client-only; no backend).
+3. **M3+**: Comments (e.g. Giscus), richer project entries, analytics tuning, more games or Fun content.
 
 ## Out of scope (for now)
 

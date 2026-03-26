@@ -4,6 +4,7 @@
 
 - **Node.js** 20+ (LTS recommended) for local `npm run dev` / `npm run build`.
 - **Git** for commits; **GitHub** for remote and Actions.
+- **Docker Desktop** (optional): only if you use the Compose workflow below.
 
 CI builds on every push to the working branch / `main` — you do **not** have to build locally to deploy.
 
@@ -30,6 +31,32 @@ Open the URL Vite prints (usually `http://localhost:5173`).
 npm run build    # production build to dist/
 npm run preview  # serve dist/ locally
 ```
+
+## Docker (optional local dev)
+
+Same app as above, but Node runs inside a container with the repo bind-mounted. Useful for a consistent environment or when you prefer not to install Node on the host.
+
+| File | Role |
+|------|------|
+| `Dockerfile` | Node 20 image; installs deps; runs `docker-entrypoint.sh`. |
+| `docker-compose.yml` | Mounts `.` → `/app`, named volume for `node_modules`, exposes `5173`, sets `CHOKIDAR_USEPOLLING=true` for file watching under Docker mounts (especially on Windows). |
+| `docker-entrypoint.sh` | `npm ci` → `npm run build` → `npm run dev`. |
+| `build_and_run.sh` / `build_and_run.ps1` | Run `docker compose up` (add `--build` / `-Build` to rebuild the image). |
+
+**Shell scripts** should use **LF** line endings (see `.gitattributes` / `.editorconfig`) so Bash in Git Bash/WSL does not see `\r` errors.
+
+**Vite** (`vite.config.ts`): `server.host` is enabled and polling follows `CHOKIDAR_USEPOLLING` so the dev server is reachable from the host and HMR works in the container.
+
+## Fun & Gomoku (routes)
+
+| Route | Content |
+|-------|---------|
+| `/fun` | Fun hub (links to Games and placeholders). |
+| `/fun/games` | Games index. |
+| `/fun/games/gomoku` | Two-player Gomoku, 19×19, same device — pure frontend (`src/lib/gomoku.ts`, `src/pages/GomokuPage.tsx`). |
+| `/badminton` | Redirects to `/fun` (old links keep working). |
+
+On **narrow viewports**, the board uses fixed cell sizes and **horizontal scroll**; optional **pinch-to-zoom** applies only to the board on small screens (see `usePinchZoomBoard`). **Undo** is one move; a **red line** marks the winning five when the game ends.
 
 ## Blog posts (Markdown)
 
@@ -99,10 +126,15 @@ If these are **unset**, the site builds and runs **without** Umami (no broken re
 | **`ReferenceError: Buffer is not defined`** / **`Can't find variable: Buffer`** | Front matter is parsed in the browser with **`yaml`** and `src/lib/frontMatter.ts` (no Node `Buffer`). If this appears after a dependency change, something may be pulling Node-only code into the bundle — check recent imports. |
 | 404 on refresh inside the SPA | `npm run build` copies `index.html` → `404.html` for client-side routes. |
 | Styles missing | Confirm Tailwind content paths include `index.html` and `./src/**/*`. |
+| **`docker` not found** / Compose fails | Install Docker Desktop; ensure `docker compose` is on `PATH`. |
+| Bash **`set: pipefail`** / **`$'\r': command not found`** | Script saved as CRLF — normalize to LF (see `.editorconfig`) or run `git add --renormalize .` after pulling `.gitattributes`. |
 
 ## Repo layout (after migration)
 
 - `src/content/posts/` — Markdown posts  
-- `src/pages/` or `src/routes/` — page components  
+- `src/pages/` — page components (Home, Blog, Fun, Gomoku, etc.)  
+- `src/hooks/` — shared hooks (e.g. document title, pinch zoom for Gomoku)  
+- `src/lib/` — utilities (`posts`, `gomoku`, …)  
 - `public/` — static assets (favicon, etc.)  
-- `dist/` — build output (gitignored)
+- `dist/` — build output (gitignored)  
+- `Dockerfile`, `docker-compose.yml`, `docker-entrypoint.sh`, `build_and_run.sh`, `build_and_run.ps1` — optional Docker dev workflow
