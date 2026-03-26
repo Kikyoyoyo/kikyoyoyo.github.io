@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* Mizuno-inspired: cool blue + off-white, no violet */
-  --color-mizuno-50: #f4f8fc;
-  --color-mizuno-100: #e8f0f8;
-  --color-mizuno-200: #c5d8ec;
-  --color-mizuno-300: #9ebfd9;
-  --color-mizuno-400: #6b94b8;
-  --color-mizuno-600: #0057a3;
-  --color-mizuno-700: #004682;
-  --color-mizuno-800: #003560;
-  --color-mizuno-900: #0a1628;
+  /* Brand primary #031583; lighter/darker steps for UI, no violet */
+  --color-mizuno-50: #f3f5fc;
+  --color-mizuno-100: #e6eaf7;
+  --color-mizuno-200: #c2cce8;
+  --color-mizuno-300: #9aa8d4;
+  --color-mizuno-400: #6b7cb8;
+  --color-mizuno-600: #031583;
+  --color-mizuno-700: #02116a;
+  --color-mizuno-800: #010c52;
+  --color-mizuno-900: #060f28;
   --font-serif: Georgia, "Times New Roman", Times, serif;
   --font-sans: ui-sans-serif, system-ui, sans-serif;
 }

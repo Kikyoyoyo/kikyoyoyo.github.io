@@ -23,7 +23,7 @@
 
 ## Visual & UX
 
-- **Aesthetic**: Minimal academic; **Mizuno-inspired blue + white** (no violet-heavy Tailwind defaults).
+- **Aesthetic**: Minimal academic; **brand blue `#031583` + white** (no violet-heavy Tailwind defaults).
 - **Theme**: **System** dark/light via `prefers-color-scheme`; if unavailable, **light**.
 - **Page vs nav**: Main content sits on **white** (light) / dark body (dark). The **header is a full-width brand-blue banner** (deeper navy in dark mode) with light text; the **K** logo uses a white tile + blue mark on that bar for contrast.
 - **Nav**: Sticky top bar: Home, Blog, Archive, Projects, Fun; **site search** entry (client-side index over post metadata + body text).

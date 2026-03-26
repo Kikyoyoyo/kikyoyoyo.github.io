@@ -24,9 +24,10 @@ export function Logo({ className = "", variant = "default" }: LogoProps) {
       aria-hidden="true"
     >
       <rect width="32" height="32" rx="6" className={tile} />
+      {/* Vertical stem + two triangles sharing one joint at (12,16) — reads as K */}
       <path
         className={mark}
-        d="M8 24V8h3.2l6.4 9.6L24 8h3.2v16H24V13.6l-5.6 8.4h-1.6L11.2 13.6V24H8z"
+        d="M8 8h4v16H8V8zM12 8L24 8 12 16zM12 16L24 24 12 24z"
       />
     </svg>
   );
