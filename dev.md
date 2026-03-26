@@ -77,7 +77,7 @@ If these are **unset**, the site builds and runs **without** Umami (no broken re
 ## Layout & header
 
 - **Body**: `bg-white` in light mode (not off-white) so the page reads as clean white; dark mode uses `mizuno-900`.
-- **Header**: Full-width **`mizuno-600`** bar with white/light nav links; **`Logo variant="onBrand"`** = white tile + `mizuno-600` K so the mark matches the brand blue on the bar. Dark mode header uses **`mizuno-800`** for a deeper navy strip.
+- **Header**: Full-width **`mizuno-600`** bar (`#031583`) with white/light nav links; **`Logo variant="onBrand"`** = white tile + `mizuno-600` K so the mark matches the brand blue on the bar. Dark mode header uses **`mizuno-800`** for a deeper navy strip.
 
 ## Accessibility (AA)
 
