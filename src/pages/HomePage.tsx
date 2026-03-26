@@ -63,14 +63,14 @@ export function HomePage() {
             </span>
           </li>
           <li>
-            GitHub:{" "
-              < a
+            GitHub:{" "}
+            <a
               href="https://github.com/Kikyoyoyo/"
-            className="text-mizuno-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
+              className="text-mizuno-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
             >
-            github.com/Kikyoyoyo
-          </a>
-        </li>
+              github.com/Kikyoyoyo
+            </a>
+          </li>
         <li>
           HuggingFace:{" "}
           <a
@@ -82,6 +82,6 @@ export function HomePage() {
         </li>
       </ul>
     </section>
-    </article >
+    </article>
   );
 }
