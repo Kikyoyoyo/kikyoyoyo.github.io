@@ -9,10 +9,11 @@ export function HomePage() {
       <h1 className="mb-4 text-3xl font-semibold tracking-tight text-mizuno-900 dark:text-mizuno-50">
         Zheng Chen
       </h1>
-      <p className="mb-2 text-mizuno-800 dark:text-mizuno-200">
-        Hon. BSc. Computer Science Specialist &amp; Math Major, University of Toronto
+      <p className="mb-8 text-mizuno-800 dark:text-mizuno-200">
+        Hi, I am Zheng Chen, Jack — a math &amp; CS enjoyer, badminton enthusiast, art enjoyer, philosophy reader, and
+        most importantly, a genuine friend. Hon. BSc. Computer Science Specialist &amp; Math Major, University of
+        Toronto. 2025–2026: quant development and quant research.
       </p>
-      <p className="mb-8 text-mizuno-700 dark:text-mizuno-300">2025–2026: quant development and quant research.</p>
 
       <section aria-labelledby="explore-heading" className="mb-10">
         <h2 id="explore-heading" className="mb-3 text-xl font-semibold text-mizuno-900 dark:text-mizuno-50">
@@ -41,7 +42,7 @@ export function HomePage() {
               to="/badminton"
               className="text-mizuno-700 underline underline-offset-2 hover:text-mizuno-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
             >
-              Badminton
+              Fun
             </Link>
           </li>
         </ul>
@@ -80,29 +81,6 @@ export function HomePage() {
           </li>
           <li>Phone: +1 365 993 0207</li>
           <li>Phone: +86 135 0189 6430</li>
-        </ul>
-      </section>
-
-      <section aria-labelledby="bio-heading" className="mt-10">
-        <h2 id="bio-heading" className="mb-3 text-xl font-semibold text-mizuno-900 dark:text-mizuno-50">
-          Short bio
-        </h2>
-        <p className="text-mizuno-800 dark:text-mizuno-200">
-          Hi, I am Zheng Chen, Jack, a math &amp; CS enjoyer, badminton enthusiast, art enjoyer, philosophy reader, and
-          most importantly, a genuine friend.
-        </p>
-        <h3 className="mt-6 mb-2 text-lg font-semibold text-mizuno-900 dark:text-mizuno-50">Bookshelf</h3>
-        <ul className="list-inside list-disc space-y-1 text-mizuno-800 dark:text-mizuno-200">
-          <li>
-            <em>Linear Algebra Done Right</em>, 3rd ed. by Sheldon Axler
-          </li>
-          <li>
-            <em>Contemporary Abstract Algebra</em>, 9th ed. by Joseph A. Gallian
-          </li>
-          <li>
-            <em>A Random Walk Down Wall Street</em>, by Burton G. Malkiel
-          </li>
-          <li>—</li>
         </ul>
       </section>
     </article>
