@@ -96,6 +96,7 @@ If these are **unset**, the site builds and runs **without** Umami (no broken re
 |-------|------|
 | **`https://<user>.github.io/` shows GitHub’s “Site not found”** (not your app) while Actions is green | Often **Pages + Actions mis-sync**. Ensure **Settings → Pages → Build and deployment** uses **GitHub Actions** (not “Deploy from a branch” pointing at an empty `main` / root). Re-save if needed. This workflow runs **`actions/configure-pages`** before upload so the Pages site is registered. If you still see the generic GitHub 404, open the latest **Deploy to GitHub Pages** run and confirm the **deploy** job completed; then wait a few minutes for CDN. |
 | Blank page on Pages | Check Actions log; confirm `homepage` / `base` in Vite matches repo type (`/` for `username.github.io`). |
+| **`ReferenceError: Buffer is not defined`** (or “Can’t find variable: Buffer”) in the console | **`gray-matter`** calls Node’s `Buffer` when parsing front matter. The app loads a **`buffer` polyfill** in `src/polyfills.ts` before React; if you see this error, ensure `main.tsx` still imports `./polyfills` first. |
 | 404 on refresh inside the SPA | `npm run build` copies `index.html` → `404.html` for client-side routes. |
 | Styles missing | Confirm Tailwind content paths include `index.html` and `./src/**/*`. |
 | **`Can't find variable: Buffer`** / `Buffer is not defined` (often Safari) | **gray-matter** used Node’s `Buffer` in the browser bundle. Front matter is parsed with **`yaml`** and a `---` … `---` splitter in `src/lib/frontMatter.ts` instead — no polyfill. |
