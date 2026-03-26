@@ -2,23 +2,23 @@
 
 ## Prerequisites
 
-- **Node.js** 20+ (LTS recommended) for local `npm run dev` / `npm run build`.
-- **Git** for commits; **GitHub** for remote and Actions.
-- **Docker Desktop** (optional): only if you use the Compose workflow below.
+- **Node.js** 20+ (LTS recommended) — **default** way to run `npm run dev` / `npm run build` on your machine.
+- **Git** for commits; **GitHub** for remote.
+- **Docker Desktop** (optional) — alternate local dev via Compose (see below); you do **not** need Docker for day-to-day work if Node is installed.
 
-CI builds on every push to the working branch / `main` — you do **not** have to build locally to deploy.
+## Local vs Docker vs production
 
-## What is GitHub Actions (here)?
+| Where | What runs |
+|-------|-----------|
+| **Your machine (default)** | Node 20: `npm ci`, `npm run dev`, `npm run build` — same toolchain as CI. |
+| **Your machine (optional)** | Docker Compose: Node inside a container; handy if you skip host Node or want an isolated env. |
+| **Production (always)** | **[GitHub Actions](.github/workflows/deploy.yml)** on push to `main`: `npm ci` → `npm run build` → upload `dist/` to **GitHub Pages**. The Docker image is **not** used in CI; the live site is whatever Actions builds. |
 
-A workflow in `.github/workflows/` runs on GitHub’s servers when you push. Our workflow:
+You do **not** have to build locally to deploy — push and let Actions run — but local `npm run build` is useful to catch errors before push.
 
-1. Checks out the repo.
-2. Runs `npm ci` and `npm run build`.
-3. Uploads `dist/` to GitHub Pages (or pushes to `gh-pages` branch, depending on workflow — see the YAML file).
+Keep **`package-lock.json`** in sync with **`package.json`** (commit both after `npm install`); `npm ci` in Actions and in the Docker entrypoint expects a matching lockfile.
 
-You see pass/fail under the **Actions** tab.
-
-## Local development
+## Local development (default)
 
 ```bash
 npm ci
@@ -32,9 +32,19 @@ npm run build    # production build to dist/
 npm run preview  # serve dist/ locally
 ```
 
+## GitHub Actions (deploy)
+
+When you push to **`main`**, the **Deploy to GitHub Pages** workflow:
+
+1. Checks out the repo on GitHub’s runners.
+2. Runs **`npm ci`** and **`npm run build`** (Node 20 in the workflow).
+3. Uploads **`dist/`** as the Pages artifact.
+
+Optional build-time env vars (e.g. Umami) are set in the workflow **`env:`** block from repository **Secrets**. See pass/fail under the **Actions** tab.
+
 ## Docker (optional local dev)
 
-Same app as above, but Node runs inside a container with the repo bind-mounted. Useful for a consistent environment or when you prefer not to install Node on the host.
+Same app as local Node, but Node runs inside a container with the repo bind-mounted. Use this when you prefer not to install Node on the host or want a repeatable Linux environment; **it does not replace** GitHub Actions for the public site.
 
 | File | Role |
 |------|------|
@@ -47,13 +57,18 @@ Same app as above, but Node runs inside a container with the repo bind-mounted. 
 
 **Vite** (`vite.config.ts`): `server.host` is enabled and polling follows `CHOKIDAR_USEPOLLING` so the dev server is reachable from the host and HMR works in the container.
 
-## Fun & Gomoku (routes)
+**No Node on the host?** Update dependencies from the container (writes into the bind-mounted repo):  
+`docker compose run --rm --entrypoint "" app npm install <package>` — then commit `package.json` and `package-lock.json` so **GitHub Actions** `npm ci` stays in sync.
+
+## Fun (routes)
 
 | Route | Content |
 |-------|---------|
-| `/fun` | Fun hub (links to Games and placeholders). |
+| `/fun` | Fun hub (links to Games, Tools, placeholders). |
 | `/fun/games` | Games index. |
 | `/fun/games/gomoku` | Two-player Gomoku, 19×19, same device — pure frontend (`src/lib/gomoku.ts`, `src/pages/GomokuPage.tsx`). |
+| `/fun/tools` | Tools index. |
+| `/fun/tools/local-file-transfer` | Same-LAN file transfer (WebRTC + Firebase Realtime DB signaling): `src/pages/LocalFileTransferPage.tsx`, `src/hooks/useFileTransfer.ts`, `src/lib/firebase.ts`, `src/lib/webrtc.ts`. |
 | `/badminton` | Redirects to `/fun` (old links keep working). |
 
 On **narrow viewports**, the board uses fixed cell sizes and **horizontal scroll**; optional **pinch-to-zoom** applies only to the board on small screens (see `usePinchZoomBoard`). **Undo** is one move; a **red line** marks the winning five when the game ends.
@@ -101,6 +116,46 @@ If these are **unset**, the site builds and runs **without** Umami (no broken re
 
 **Privacy note**: Tell visitors you use analytics if your jurisdiction or employer requires it; Umami is lighter than many alternatives but policies are your responsibility.
 
+## Firebase — Local File Transfer signaling (optional)
+
+The **Local File Transfer** tool (`/fun/tools/local-file-transfer`) uses **Firebase Realtime Database** only to exchange WebRTC signaling (SDP + ICE). File bytes are not uploaded to Firebase.
+
+**One-time setup:**
+
+1. In [Firebase console](https://console.firebase.google.com/), create a project (Spark / free tier is enough for light use).
+2. Enable **Realtime Database** (not Firestore for this feature). Pick a region; note the database URL (e.g. `https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com`).
+3. Project settings → **Your apps** → Web app → copy the config snippet values.
+
+**Build-time env vars** (Vite exposes only `VITE_*` to the client):
+
+| Variable | Meaning |
+|----------|---------|
+| `VITE_FIREBASE_API_KEY` | Web API key from Firebase config |
+| `VITE_FIREBASE_AUTH_DOMAIN` | e.g. `YOUR_PROJECT_ID.firebaseapp.com` |
+| `VITE_FIREBASE_DATABASE_URL` | Realtime Database URL |
+| `VITE_FIREBASE_PROJECT_ID` | Project ID |
+
+**Local dev:** create `.env.local` in the repo root with those four variables (do not commit this file; it is gitignored by convention).
+
+**GitHub Actions:** add the same four names as **repository secrets** (Settings → Secrets and variables → Actions). The deploy workflow passes them into `npm run build` so production Pages builds include the config.
+
+**Realtime Database rules (manual):** lock down writes to room paths only, for example:
+
+```json
+{
+  "rules": {
+    "rooms": {
+      "$roomId": {
+        ".read": true,
+        ".write": true
+      }
+    }
+  }
+}
+```
+
+Tighten further if you want stricter caps (e.g. validation on `createdAt` / size of strings). If these variables are **unset**, the Local File Transfer page still loads but shows a short “not configured” message instead of the tool.
+
 ## Layout & header
 
 - **Body**: `bg-white` in light mode (not off-white) so the page reads as clean white; dark mode uses `mizuno-900`.
@@ -114,6 +169,7 @@ If these are **unset**, the site builds and runs **without** Umami (no broken re
 
 ## Deployment
 
+- **Build**: Always on **GitHub Actions** after push (see **GitHub Actions (deploy)** above). Docker is for optional local dev only.
 - **GitHub Pages**: Settings → Pages → source from **GitHub Actions** (recommended for Vite) or the branch the workflow deploys to.
 - Base path for `username.github.io` root site is `/` — no extra `base` in Vite unless you use a project site path.
 
@@ -132,9 +188,9 @@ If these are **unset**, the site builds and runs **without** Umami (no broken re
 ## Repo layout (after migration)
 
 - `src/content/posts/` — Markdown posts  
-- `src/pages/` — page components (Home, Blog, Fun, Gomoku, etc.)  
-- `src/hooks/` — shared hooks (e.g. document title, pinch zoom for Gomoku)  
-- `src/lib/` — utilities (`posts`, `gomoku`, …)  
+- `src/pages/` — page components (Home, Blog, Fun, Gomoku, Tools, Local File Transfer, …)  
+- `src/hooks/` — shared hooks (e.g. document title, pinch zoom for Gomoku, `useFileTransfer`)  
+- `src/lib/` — utilities (`posts`, `gomoku`, `firebase` signaling, `webrtc` helpers, …)  
 - `public/` — static assets (favicon, etc.)  
 - `dist/` — build output (gitignored)  
-- `Dockerfile`, `docker-compose.yml`, `docker-entrypoint.sh`, `build_and_run.sh`, `build_and_run.ps1` — optional Docker dev workflow
+- `Dockerfile`, `docker-compose.yml`, `docker-entrypoint.sh`, `build_and_run.sh`, `build_and_run.ps1` — optional local dev via Docker Compose (CI does not use this image)

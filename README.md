@@ -25,7 +25,7 @@ Add `*.md` under `src/content/posts/` with YAML front matter (`title`, `date`, `
 The workflow `.github/workflows/deploy.yml` runs on pushes to **`main`**.
 
 1. Repository **Settings → Pages**: set source to **GitHub Actions** (not “Deploy from a branch” for this setup).
-2. Optional: **Settings → Secrets and variables → Actions** — add `VITE_UMAMI_WEBSITE_ID` and `VITE_UMAMI_SCRIPT_URL` for Umami (see `dev.md`).
+2. Optional: **Settings → Secrets and variables → Actions** — add `VITE_UMAMI_WEBSITE_ID` and `VITE_UMAMI_SCRIPT_URL` for Umami; add `VITE_FIREBASE_*` for Local File Transfer (see `dev.md`).
 
 ## License
 
