@@ -26,6 +26,18 @@ npm run dev
 
 Open the URL Vite prints (usually `http://localhost:5173`).
 
+## Design tokens (Mizuno-inspired)
+
+Defined in `src/index.css` (`@theme`). Main accents use **deep blue `#001489`** (`mizuno-600`), not Tailwind’s default violet.
+
+| Token | Typical use |
+|-------|-------------|
+| `mizuno-50`–`100` | Light backgrounds, subtle panels |
+| `mizuno-600` | Links, focus rings, logo “K” fill (light mode) |
+| `mizuno-900` | Body text (light), page background (dark) |
+
+**Logo / favicon**: `src/components/Logo.tsx` and `public/favicon.svg`—white tile, `rx="2"`, geometric **K**; keep them in sync when changing the mark.
+
 ```bash
 npm run build    # production build to dist/
 npm run preview  # serve dist/ locally
