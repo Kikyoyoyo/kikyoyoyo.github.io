@@ -28,6 +28,18 @@
 - **Nav**: Sticky top bar: Home, Blog, Archive, Projects, Badminton; **site search** entry (client-side index over post metadata + body text).
 - **Logo**: Blue “K” (SVG), favicon aligned with same mark.
 
+### Mizuno-inspired color & logo language (reference only)
+
+We **do not** copy Mizuno’s RunBird mark or wordmark. We echo their **graphic language**: one strong **deep blue** on **white**, flat shapes, high contrast, no gradients.
+
+| Role | Token / value |
+|------|----------------|
+| Primary / links / logo fill | `mizuno-600` → **`#001489`** (brand-adjacent navy blue) |
+| Page background (light) | `mizuno-50`–`100`, plenty of white |
+| Surfaces / chrome (dark) | `mizuno-900` with light text; accents stay readable on navy |
+
+**Logo**: Small **white tile** with **`rx="2"`** (badge-like corners), **bold geometric “K”** built from simple paths—same idea as an athletic mark: minimal, flat, legible at favicon size.
+
 ## Technical stack
 
 - **React** + **Vite** + **TypeScript**.
