@@ -20,7 +20,7 @@
     @apply antialiased;
   }
   body {
-    @apply bg-mizuno-50 text-mizuno-900 font-serif dark:bg-mizuno-900 dark:text-mizuno-50;
+    @apply bg-white text-mizuno-900 font-serif dark:bg-mizuno-900 dark:text-mizuno-50;
   }
   @media (prefers-reduced-motion: reduce) {
     *,
