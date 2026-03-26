@@ -3,21 +3,21 @@
 ## Goals
 
 - **Primary**: English blog (Markdown) with thoughts, phenomena, lessons learned; quant-adjacent audience (friends, collaborators, researchers).
-- **Secondary**: Lightweight personal hub with **Projects** and **Badminton** pages (content grows over time).
+- **Secondary**: Lightweight personal hub with **Projects** and **Fun** (badminton and misc.; route `/badminton`) pages (content grows over time).
 - **Not in scope**: Marketing-style SEO, Lighthouse score chasing.
 
 ## Content & information architecture
 
 | Page / area | Purpose |
 |-------------|---------|
-| **Home** | One-screen intro, blue **K** logo, links to Blog / Projects / Badminton, contact line (email obfuscated). |
+| **Home** | One-screen intro (name + bio merged), blue **K** logo, links to Blog / Projects / Fun, contact line (email obfuscated). |
 | **Blog** | Post list (newest first), optional short excerpts from Markdown. |
 | **Blog post** | Renders `.md` with front matter: `title`, `date`, `category`, `tags`, `description` (optional). |
 | **Categories** | `/blog/category/:slug` — posts filtered by `category`. |
 | **Tags** | `/blog/tag/:slug` — posts filtered by tag. |
 | **Archive** | `/blog/archive` — posts grouped by month (YYYY-MM) for “what did I write when”. |
 | **Projects** | Placeholder-friendly; expandable later. |
-| **Badminton** | Placeholder-friendly; expandable later. |
+| **Fun** (`/badminton`) | Placeholder-friendly; expandable later (badminton, hobbies, etc.). |
 
 **Markdown source**: files under `src/content/posts/*.md`, committed to Git. Front matter dates are normalized to strings (YAML may parse bare `YYYY-MM-DD` as `Date`, which React cannot render).
 
@@ -26,7 +26,7 @@
 - **Aesthetic**: Minimal academic; **Mizuno-inspired blue + white** (no violet-heavy Tailwind defaults).
 - **Theme**: **System** dark/light via `prefers-color-scheme`; if unavailable, **light**.
 - **Page vs nav**: Main content sits on **white** (light) / dark body (dark). The **header is a full-width brand-blue banner** (deeper navy in dark mode) with light text; the **K** logo uses a white tile + blue mark on that bar for contrast.
-- **Nav**: Sticky top bar: Home, Blog, Archive, Projects, Badminton; **site search** entry (client-side index over post metadata + body text).
+- **Nav**: Sticky top bar: Home, Blog, Archive, Projects, Fun; **site search** entry (client-side index over post metadata + body text).
 - **Logo**: Blue “K” (SVG), favicon aligned with same mark.
 
 ## Technical stack
@@ -63,7 +63,7 @@ See `dev.md` for wiring secrets and hosting notes.
 ## Phasing
 
 1. **M1 (this rollout)**: React app, Markdown blog, categories/tags/archive, search, sticky nav, theme, AA-oriented UI, GitHub Actions deploy, Umami hook (optional), `plan.md` / `dev.md`.
-2. **M2**: Flesh out Projects / Badminton; more posts; RSS if desired.
+2. **M2**: Flesh out Projects / Fun; more posts; RSS if desired.
 3. **M3+**: Comments (e.g. Giscus), richer project entries, analytics tuning.
 
 ## Out of scope (for now)

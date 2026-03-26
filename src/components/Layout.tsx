@@ -48,7 +48,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 Projects
               </NavLink>
               <NavLink to="/badminton" className={navLinkClass}>
-                Badminton
+                Fun
               </NavLink>
               <button
                 type="button"
