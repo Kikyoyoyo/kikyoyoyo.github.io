@@ -18,6 +18,36 @@ export function iceCandidateFromJson(json: string): RTCIceCandidateInit {
   return JSON.parse(json) as RTCIceCandidateInit;
 }
 
+/** Queue remote ICE until setRemoteDescription has run; early candidates are otherwise dropped. */
+export function createRemoteIceQueue(pc: RTCPeerConnection) {
+  const queue: RTCIceCandidateInit[] = [];
+
+  const add = async (init: RTCIceCandidateInit) => {
+    if (!pc.remoteDescription) {
+      queue.push(init);
+      return;
+    }
+    try {
+      await pc.addIceCandidate(init);
+    } catch {
+      /* ignore invalid / late candidates */
+    }
+  };
+
+  const flush = async () => {
+    const pending = queue.splice(0);
+    for (const init of pending) {
+      try {
+        await pc.addIceCandidate(init);
+      } catch {
+        /* ignore */
+      }
+    }
+  };
+
+  return { add, flush };
+}
+
 export async function waitForIceGatheringComplete(pc: RTCPeerConnection): Promise<void> {
   if (pc.iceGatheringState === "complete") return;
   await new Promise<void>((resolve) => {

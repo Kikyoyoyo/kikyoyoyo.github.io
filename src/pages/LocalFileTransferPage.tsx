@@ -238,10 +238,24 @@ export function LocalFileTransferPage() {
             </ul>
           </div>
 
+          {ft.receiverRows.length > 0 &&
+            !ft.receiverRows.every((r) => r.status === "connected") &&
+            ft.phase !== "transferring" && (
+              <p className="text-sm text-mizuno-600 dark:text-mizuno-400">
+                Wait until every receiver shows status <strong>connected</strong> (WebRTC data
+                channel open), then send.
+              </p>
+            )}
+
           <div className="flex flex-wrap gap-3">
             <button
               type="button"
-              disabled={!ft.file || ft.receiverRows.length === 0 || ft.phase === "transferring"}
+              disabled={
+                !ft.file ||
+                ft.receiverRows.length === 0 ||
+                ft.phase === "transferring" ||
+                !ft.receiverRows.every((r) => r.status === "connected")
+              }
               onClick={() => void ft.startTransfer()}
               className="rounded bg-mizuno-600 px-4 py-2 text-white hover:bg-mizuno-700 disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600"
             >

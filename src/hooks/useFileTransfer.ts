@@ -19,12 +19,21 @@ import {
 } from "../lib/firebase";
 import {
   createPeerConnection,
+  createRemoteIceQueue,
   iceCandidateFromJson,
   iceCandidateToJson,
   receiveFileFromDataChannel,
   sendFileOverDataChannel,
   waitForIceGatheringComplete,
 } from "../lib/webrtc";
+
+function mergePeerStatus(db: string | undefined, ui: string | undefined): string {
+  if (db === "error" || ui === "error") return "error";
+  const rank = (s: string | undefined) =>
+    ({ joined: 1, signaling: 2, connected: 3, done: 4 }[s ?? ""] ?? 0);
+  if (rank(db) >= rank(ui)) return db ?? ui ?? "joined";
+  return ui ?? db ?? "joined";
+}
 
 export type TransferRole = "idle" | "sender" | "receiver";
 
@@ -139,12 +148,22 @@ export function useFileTransfer() {
       const pc = createPeerConnection();
       const dc = pc.createDataChannel("file", { ordered: true });
       senderMapRef.current.set(peerId, { pc, dc });
+      const remoteIce = createRemoteIceQueue(pc);
 
       updateRow(peerId, snap, { nickname: snap.nickname ?? "?", status: "signaling" });
 
       pc.onicecandidate = (ev) => {
         if (ev.candidate) {
           void pushSenderIce(rid, peerId, iceCandidateToJson(ev.candidate));
+        }
+      };
+
+      pc.onconnectionstatechange = () => {
+        if (pc.connectionState === "failed" || pc.connectionState === "disconnected") {
+          updateRow(peerId, snap, {
+            status: "error",
+            error: `connection ${pc.connectionState}`,
+          });
         }
       };
 
@@ -163,6 +182,7 @@ export function useFileTransfer() {
           if (pc.remoteDescription?.type === "answer") return;
           try {
             await pc.setRemoteDescription({ type: "answer", sdp: answer });
+            await remoteIce.flush();
           } catch (e) {
             updateRow(peerId, snap, {
               status: "error",
@@ -174,11 +194,7 @@ export function useFileTransfer() {
 
       unsubRef.current.push(
         onReceiverIceAdded(rid, peerId, async (json) => {
-          try {
-            await pc.addIceCandidate(iceCandidateFromJson(json));
-          } catch {
-            /* ignore late candidates */
-          }
+          await remoteIce.add(iceCandidateFromJson(json));
         }),
       );
 
@@ -208,7 +224,7 @@ export function useFileTransfer() {
             peerId: id,
             nickname: p?.nickname ?? old?.nickname ?? "?",
             progress: old?.progress ?? 0,
-            status: old?.status ?? p?.status ?? "joined",
+            status: mergePeerStatus(p?.status, old?.status),
             error: old?.error,
           };
         }),
@@ -248,6 +264,7 @@ export function useFileTransfer() {
 
     const pc = createPeerConnection();
     receiverRef.current = { pc, dc: null };
+    const remoteIce = createRemoteIceQueue(pc);
 
     pc.onicecandidate = (ev) => {
       if (ev.candidate) {
@@ -283,6 +300,7 @@ export function useFileTransfer() {
         if (pc.remoteDescription?.type === "offer") return;
         try {
           await pc.setRemoteDescription({ type: "offer", sdp: offerSdp });
+          await remoteIce.flush();
           const answer = await pc.createAnswer();
           await pc.setLocalDescription(answer);
           await waitForIceGatheringComplete(pc);
@@ -297,11 +315,7 @@ export function useFileTransfer() {
 
     unsubRef.current.push(
       onSenderIceAdded(trimmed, pid, async (json) => {
-        try {
-          await pc.addIceCandidate(iceCandidateFromJson(json));
-        } catch {
-          /* ignore */
-        }
+        await remoteIce.add(iceCandidateFromJson(json));
       }),
     );
 
