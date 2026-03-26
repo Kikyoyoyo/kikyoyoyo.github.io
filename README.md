@@ -29,4 +29,4 @@ The workflow `.github/workflows/deploy.yml` runs on pushes to **`main`**.
 
 ## License
 
-Personal content — all rights reserved unless stated otherwise.
+Personal content — all rights reserved unless stated otherwise. 
