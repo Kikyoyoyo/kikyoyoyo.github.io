@@ -11,6 +11,7 @@ import { FunPage } from "./pages/FunPage";
 import { GamesPage } from "./pages/GamesPage";
 import { GomokuPage } from "./pages/GomokuPage";
 import { ToolsPage } from "./pages/ToolsPage";
+import { SportsPage } from "./pages/SportsPage";
 import { LocalFileTransferPage } from "./pages/LocalFileTransferPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
@@ -30,6 +31,7 @@ export function App() {
         <Route path="/fun/games/gomoku" element={<GomokuPage />} />
         <Route path="/fun/tools" element={<ToolsPage />} />
         <Route path="/fun/tools/local-file-transfer" element={<LocalFileTransferPage />} />
+        <Route path="/fun/sports" element={<SportsPage />} />
         <Route path="/badminton" element={<Navigate to="/fun" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

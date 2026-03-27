@@ -1,44 +1,41 @@
-import { Link } from "react-router-dom";
+import { Gamepad2, Hammer } from "lucide-react";
+import { FunCategoryCard } from "../components/FunCategoryCard";
+import { BadmintonIcon } from "../components/icons/BadmintonIcon";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
+
+const iconClass = "h-7 w-7";
 
 export function FunPage() {
   useDocumentTitle("Fun — Zheng Chen");
 
   return (
     <article>
-      <h1 className="mb-4 text-3xl font-semibold text-mizuno-900 dark:text-mizuno-50">
+      <h1 className="mb-4 text-3xl font-semibold tracking-tight text-mizuno-900 dark:text-mizuno-50">
         Fun
       </h1>
-      <p className="mb-6 text-mizuno-800 dark:text-mizuno-200">
-        Sounds like Fun!
+      <p className="mb-8 text-mizuno-800 dark:text-mizuno-200">
+        Sounds like Fun! Pick a category below.
       </p>
-      <ul className="space-y-2 text-mizuno-800 dark:text-mizuno-200">
-        <li>
-          <Link
-            to="/fun/games"
-            className="text-mizuno-700 underline underline-offset-2 hover:text-mizuno-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
-          >
-            Games
-          </Link>
-          <span className="text-mizuno-600 dark:text-mizuno-400"> — </span>
-          board games in the browser (two-player, local)
-        </li>
-        <li>
-          <Link
-            to="/fun/tools"
-            className="text-mizuno-700 underline underline-offset-2 hover:text-mizuno-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
-          >
-            Tools
-          </Link>
-          <span className="text-mizuno-600 dark:text-mizuno-400"> — </span>
-          utilities (e.g. same-LAN file transfer via WebRTC)
-        </li>
-        <li>
-          <span className="text-mizuno-700 dark:text-mizuno-300">Badminton</span>
-          <span className="text-mizuno-600 dark:text-mizuno-400"> — </span>
-          placeholder for notes or links later
-        </li>
-      </ul>
+      <div className="grid gap-4 sm:grid-cols-3">
+        <FunCategoryCard
+          to="/fun/games"
+          title="Games"
+          description="Board games in the browser — two-player, local."
+          icon={<Gamepad2 className={iconClass} strokeWidth={1.75} aria-hidden />}
+        />
+        <FunCategoryCard
+          to="/fun/tools"
+          title="Tools"
+          description="Utilities such as same-LAN file transfer via WebRTC."
+          icon={<Hammer className={iconClass} strokeWidth={1.75} aria-hidden />}
+        />
+        <FunCategoryCard
+          to="/fun/sports"
+          title="Sports"
+          description="Badminton and more — notes and links (coming soon)."
+          icon={<BadmintonIcon className={iconClass} strokeWidth={1.75} aria-hidden />}
+        />
+      </div>
     </article>
   );
 }

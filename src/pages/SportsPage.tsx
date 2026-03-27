@@ -1,9 +1,9 @@
-import { Hammer } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BadmintonIcon } from "../components/icons/BadmintonIcon";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
-export function ToolsPage() {
-  useDocumentTitle("Tools — Zheng Chen");
+export function SportsPage() {
+  useDocumentTitle("Sports — Zheng Chen");
 
   return (
     <article>
@@ -18,32 +18,23 @@ export function ToolsPage() {
           Fun
         </Link>
         <span aria-hidden="true"> / </span>
-        <span className="text-mizuno-800 dark:text-mizuno-200">Tools</span>
+        <span className="text-mizuno-800 dark:text-mizuno-200">Sports</span>
       </nav>
       <h1 className="mb-4 flex items-center gap-3 text-3xl font-semibold tracking-tight text-mizuno-900 dark:text-mizuno-50">
         <span
           className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-mizuno-100 text-mizuno-600 dark:bg-mizuno-800/80 dark:text-mizuno-400"
           aria-hidden
         >
-          <Hammer className="h-7 w-7" strokeWidth={1.75} />
+          <BadmintonIcon className="h-7 w-7" strokeWidth={1.75} />
         </span>
-        Tools
+        Sports
       </h1>
-      <ul className="list-inside list-disc space-y-2 text-mizuno-800 dark:text-mizuno-200">
-        <li>
-          <Link
-            to="/fun/tools/local-file-transfer"
-            className="text-mizuno-700 underline underline-offset-2 hover:text-mizuno-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
-          >
-            Local File Transfer
-          </Link>
-          <span>
-            {" "}
-            — same Wi-Fi / LAN, WebRTC file send (1 sender → many receivers); Firebase is
-            used for signaling only
-          </span>
-        </li>
-      </ul>
+      <p className="mb-6 text-mizuno-800 dark:text-mizuno-200">
+        Notes and links about sports (starting with badminton) can live here.
+      </p>
+      <p className="text-mizuno-600 dark:text-mizuno-400">
+        Nothing listed yet — check back later.
+      </p>
     </article>
   );
 }
