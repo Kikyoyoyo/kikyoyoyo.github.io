@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand primary #031583; lighter/darker steps for UI, no violet */
-  --color-mizuno-50: #f3f5fc;
-  --color-mizuno-100: #e6eaf7;
-  --color-mizuno-200: #c2cce8;
-  --color-mizuno-300: #9aa8d4;
-  --color-mizuno-400: #6b7cb8;
-  --color-mizuno-600: #031583;
-  --color-mizuno-700: #02116a;
-  --color-mizuno-800: #010c52;
-  --color-mizuno-900: #060f28;
+  /* Brand anchor: blueish-600 #164fc0; lighter/darker steps same hue family (~217°) */
+  --color-blueish-50: #f0f5fc;
+  --color-blueish-100: #e0eaf8;
+  --color-blueish-200: #c8d6f2;
+  --color-blueish-300: #a3b8e8;
+  --color-blueish-400: #6b8fdb;
+  --color-blueish-500: #3d6bc8;
+  --color-blueish-600: #164fc0;
+  --color-blueish-700: #1240a0;
+  --color-blueish-800: #0e3280;
+  --color-blueish-900: #0b2660;
+  --color-blueish-950: #0a1838;
   --font-serif: Georgia, "Times New Roman", Times, serif;
   --font-sans: ui-sans-serif, system-ui, sans-serif;
 }
@@ -20,7 +22,7 @@
     @apply antialiased;
   }
   body {
-    @apply bg-white text-mizuno-900 font-serif dark:bg-mizuno-900 dark:text-mizuno-50;
+    @apply bg-white text-blueish-900 font-serif dark:bg-blueish-900 dark:text-blueish-50;
   }
   @media (prefers-reduced-motion: reduce) {
     *,
@@ -34,49 +36,49 @@
 }
 
 /* Markdown body (WCAG-friendly contrast on light/dark) */
-.prose-mizuno {
-  @apply text-mizuno-900 dark:text-mizuno-100;
+.prose-blueish {
+  @apply text-blueish-900 dark:text-blueish-100;
 }
-.prose-mizuno h1 {
-  @apply mt-8 mb-3 text-2xl font-semibold text-mizuno-900 dark:text-mizuno-50;
+.prose-blueish h1 {
+  @apply mt-8 mb-3 text-2xl font-semibold text-blueish-900 dark:text-blueish-50;
 }
-.prose-mizuno h2 {
-  @apply mt-8 mb-3 text-xl font-semibold text-mizuno-900 dark:text-mizuno-50;
+.prose-blueish h2 {
+  @apply mt-8 mb-3 text-xl font-semibold text-blueish-900 dark:text-blueish-50;
 }
-.prose-mizuno h3 {
-  @apply mt-6 mb-2 text-lg font-semibold text-mizuno-900 dark:text-mizuno-50;
+.prose-blueish h3 {
+  @apply mt-6 mb-2 text-lg font-semibold text-blueish-900 dark:text-blueish-50;
 }
-.prose-mizuno p {
+.prose-blueish p {
   @apply my-4 leading-relaxed;
 }
-.prose-mizuno ul {
+.prose-blueish ul {
   @apply my-4 list-disc pl-6;
 }
-.prose-mizuno ol {
+.prose-blueish ol {
   @apply my-4 list-decimal pl-6;
 }
-.prose-mizuno li {
+.prose-blueish li {
   @apply my-1;
 }
-.prose-mizuno blockquote {
-  @apply my-4 border-l-4 border-mizuno-300 pl-4 text-mizuno-800 dark:border-mizuno-600 dark:text-mizuno-200;
+.prose-blueish blockquote {
+  @apply my-4 border-l-4 border-blueish-300 pl-4 text-blueish-800 dark:border-blueish-600 dark:text-blueish-200;
 }
-.prose-mizuno pre {
-  @apply my-4 overflow-x-auto rounded border border-mizuno-200 bg-mizuno-100 p-4 font-mono text-sm text-mizuno-900 dark:border-mizuno-600 dark:bg-mizuno-800 dark:text-mizuno-100;
+.prose-blueish pre {
+  @apply my-4 overflow-x-auto rounded border border-blueish-200 bg-blueish-100 p-4 font-mono text-sm text-blueish-900 dark:border-blueish-600 dark:bg-blueish-800 dark:text-blueish-100;
 }
-.prose-mizuno code {
-  @apply rounded bg-mizuno-100 px-1 py-0.5 font-mono text-[0.9em] text-mizuno-900 dark:bg-mizuno-800 dark:text-mizuno-100;
+.prose-blueish code {
+  @apply rounded bg-blueish-100 px-1 py-0.5 font-mono text-[0.9em] text-blueish-900 dark:bg-blueish-800 dark:text-blueish-100;
 }
-.prose-mizuno pre code {
+.prose-blueish pre code {
   @apply bg-transparent p-0;
 }
-.prose-mizuno table {
-  @apply my-4 w-full border-collapse border border-mizuno-200 dark:border-mizuno-600;
+.prose-blueish table {
+  @apply my-4 w-full border-collapse border border-blueish-200 dark:border-blueish-600;
 }
-.prose-mizuno th,
-.prose-mizuno td {
-  @apply border border-mizuno-200 px-3 py-2 text-left dark:border-mizuno-600;
+.prose-blueish th,
+.prose-blueish td {
+  @apply border border-blueish-200 px-3 py-2 text-left dark:border-blueish-600;
 }
-.prose-mizuno hr {
-  @apply my-8 border-mizuno-200 dark:border-mizuno-700;
+.prose-blueish hr {
+  @apply my-8 border-blueish-200 dark:border-blueish-700;
 }

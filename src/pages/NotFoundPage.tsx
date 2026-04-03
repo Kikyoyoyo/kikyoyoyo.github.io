@@ -6,11 +6,11 @@ export function NotFoundPage() {
 
   return (
     <article>
-      <h1 className="text-2xl font-semibold text-mizuno-900 dark:text-mizuno-50">Page not found</h1>
-      <p className="mt-4 text-mizuno-800 dark:text-mizuno-200">
+      <h1 className="text-2xl font-semibold text-blueish-900 dark:text-blueish-50">Page not found</h1>
+      <p className="mt-4 text-blueish-800 dark:text-blueish-200">
         <Link
           to="/"
-          className="text-mizuno-700 underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
+          className="text-blueish-700 underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:text-blueish-200"
         >
           Go home
         </Link>

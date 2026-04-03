@@ -20,12 +20,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <UmamiScript />
       <a
         href="#main-content"
-        className="sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:inline-block focus:h-auto focus:w-auto focus:overflow-visible focus:rounded focus:bg-mizuno-600 focus:px-3 focus:py-2 focus:font-sans focus:text-white focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white"
+        className="sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:inline-block focus:h-auto focus:w-auto focus:overflow-visible focus:rounded focus:bg-blueish-600 focus:px-3 focus:py-2 focus:font-sans focus:text-white focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white"
       >
         Skip to main content
       </a>
       <div className="min-h-screen flex flex-col">
-        <header className="sticky top-0 z-40 border-b border-mizuno-700 bg-mizuno-600 dark:border-mizuno-700 dark:bg-mizuno-800">
+        <header className="sticky top-0 z-40 border-b border-blueish-700 bg-blueish-600 dark:border-blueish-700 dark:bg-blueish-800">
           <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-3 px-4 py-3">
             <Link
               to="/"
@@ -67,7 +67,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           {children}
         </main>
 
-        <footer className="border-t border-mizuno-200 py-6 text-center font-sans text-sm text-mizuno-700 dark:border-mizuno-700 dark:text-mizuno-300">
+        <footer className="border-t border-blueish-200 py-6 text-center font-sans text-sm text-blueish-700 dark:border-blueish-700 dark:text-blueish-300">
           <p>—</p>
         </footer>
       </div>

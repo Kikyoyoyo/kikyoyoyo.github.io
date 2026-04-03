@@ -6,25 +6,25 @@ export function HomePage() {
 
   return (
     <article>
-      <h1 className="mb-4 text-3xl font-semibold tracking-tight text-mizuno-900 dark:text-mizuno-50">
+      <h1 className="mb-4 text-3xl font-semibold tracking-tight text-blueish-900 dark:text-blueish-50">
         Zheng Chen
       </h1>
-      <p className="mb-8 text-mizuno-800 dark:text-mizuno-200">
+      <p className="mb-8 text-blueish-800 dark:text-blueish-200">
         Hon. BSc. Computer Science Specialist &amp; Math Major, University of
         Toronto. Currently doing quant development and quant research.</p>
-      <p className="mb-8 text-mizuno-800 dark:text-mizuno-200">I am a math &amp; CS enjoyer, badminton enthusiast, art enjoyer, philosophy reader, and
+      <p className="mb-8 text-blueish-800 dark:text-blueish-200">I am a math &amp; CS enjoyer, badminton enthusiast, art enjoyer, philosophy reader, and
         most importantly, a genuine friend.
       </p>
 
       <section aria-labelledby="explore-heading" className="mb-10">
-        <h2 id="explore-heading" className="mb-3 text-xl font-semibold text-mizuno-900 dark:text-mizuno-50">
+        <h2 id="explore-heading" className="mb-3 text-xl font-semibold text-blueish-900 dark:text-blueish-50">
           Explore
         </h2>
-        <ul className="list-inside list-disc space-y-1 text-mizuno-800 dark:text-mizuno-200">
+        <ul className="list-inside list-disc space-y-1 text-blueish-800 dark:text-blueish-200">
           <li>
             <Link
               to="/blog"
-              className="text-mizuno-700 underline underline-offset-2 hover:text-mizuno-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
+              className="text-blueish-700 underline underline-offset-2 hover:text-blueish-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:text-blueish-200"
             >
               Blog
             </Link>{" "}
@@ -33,7 +33,7 @@ export function HomePage() {
           <li>
             <Link
               to="/projects"
-              className="text-mizuno-700 underline underline-offset-2 hover:text-mizuno-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
+              className="text-blueish-700 underline underline-offset-2 hover:text-blueish-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:text-blueish-200"
             >
               Projects
             </Link>
@@ -41,7 +41,7 @@ export function HomePage() {
           <li>
             <Link
               to="/fun"
-              className="text-mizuno-700 underline underline-offset-2 hover:text-mizuno-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
+              className="text-blueish-700 underline underline-offset-2 hover:text-blueish-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:text-blueish-200"
             >
               Fun
             </Link>
@@ -50,10 +50,10 @@ export function HomePage() {
       </section>
 
       <section aria-labelledby="contact-heading">
-        <h2 id="contact-heading" className="mb-3 text-xl font-semibold text-mizuno-900 dark:text-mizuno-50">
+        <h2 id="contact-heading" className="mb-3 text-xl font-semibold text-blueish-900 dark:text-blueish-50">
           Contact
         </h2>
-        <ul className="space-y-1 text-mizuno-800 dark:text-mizuno-200">
+        <ul className="space-y-1 text-blueish-800 dark:text-blueish-200">
           <li>
             Email:{" "}
             <span className="font-sans">
@@ -66,7 +66,7 @@ export function HomePage() {
             GitHub:{" "}
             <a
               href="https://github.com/Kikyoyoyo/"
-              className="text-mizuno-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
+              className="text-blueish-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:text-blueish-200"
             >
               github.com/Kikyoyoyo
             </a>
@@ -75,7 +75,7 @@ export function HomePage() {
           HuggingFace:{" "}
           <a
             href="https://huggingface.co/kikyoyoyo/"
-            className="text-mizuno-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
+            className="text-blueish-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:text-blueish-200"
           >
             huggingface.co/kikyoyoyo
           </a>

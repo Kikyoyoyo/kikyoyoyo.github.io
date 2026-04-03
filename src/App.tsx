@@ -10,6 +10,7 @@ import { ProjectsPage } from "./pages/ProjectsPage";
 import { FunPage } from "./pages/FunPage";
 import { GamesPage } from "./pages/GamesPage";
 import { GomokuPage } from "./pages/GomokuPage";
+import { ColorLabPage } from "./pages/ColorLabPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
 export function App() {
@@ -26,6 +27,7 @@ export function App() {
         <Route path="/fun" element={<FunPage />} />
         <Route path="/fun/games" element={<GamesPage />} />
         <Route path="/fun/games/gomoku" element={<GomokuPage />} />
+        <Route path="/fun/colors" element={<ColorLabPage />} />
         <Route path="/badminton" element={<Navigate to="/fun" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

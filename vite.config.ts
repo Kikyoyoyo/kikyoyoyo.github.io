@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import { blueishThemePlugin } from "./vite-plugin-blueish-theme";
 
 /** Docker Compose 里设 CHOKIDAR_USEPOLLING=true；不依赖 @types/node */
 function chokidarUsePolling(): boolean {
@@ -10,7 +11,7 @@ function chokidarUsePolling(): boolean {
 }
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), blueishThemePlugin()],
   base: "/",
   server: {
     host: true,

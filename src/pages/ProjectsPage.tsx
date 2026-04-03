@@ -5,8 +5,8 @@ export function ProjectsPage() {
 
   return (
     <article>
-      <h1 className="mb-4 text-3xl font-semibold text-mizuno-900 dark:text-mizuno-50">Projects</h1>
-      <p className="text-mizuno-800 dark:text-mizuno-200">
+      <h1 className="mb-4 text-3xl font-semibold text-blueish-900 dark:text-blueish-50">Projects</h1>
+      <p className="text-blueish-800 dark:text-blueish-200">
         Placeholder. Add entries here over time (repos, demos, short descriptions).
       </p>
     </article>

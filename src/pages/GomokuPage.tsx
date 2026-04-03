@@ -43,7 +43,7 @@ function GomokuBoardSurface({
   return (
     <div className="relative block w-max max-w-none md:w-full">
       <div
-        className="relative z-0 inline-grid w-max gap-0.5 rounded border border-mizuno-300 bg-amber-100/80 p-1 [grid-template-columns:repeat(19,minmax(2.5rem,2.5rem))] dark:border-mizuno-600 dark:bg-mizuno-950/80 md:w-full md:max-w-full md:[grid-template-columns:repeat(19,minmax(0,1fr))]"
+        className="relative z-0 inline-grid w-max gap-0.5 rounded border border-blueish-300 bg-amber-100/80 p-1 [grid-template-columns:repeat(19,minmax(2.5rem,2.5rem))] dark:border-blueish-600 dark:bg-blueish-950/80 md:w-full md:max-w-full md:[grid-template-columns:repeat(19,minmax(0,1fr))]"
         role="grid"
         aria-label="Gomoku board 19 by 19"
       >
@@ -53,10 +53,10 @@ function GomokuBoardSurface({
               key={`${r}-${c}`}
               type="button"
               className={[
-                "flex size-10 shrink-0 touch-manipulation items-center justify-center rounded-sm border border-mizuno-200/90 bg-amber-50 text-xs font-medium dark:border-mizuno-700 dark:bg-mizuno-900/90",
+                "flex size-10 shrink-0 touch-manipulation items-center justify-center rounded-sm border border-blueish-200/90 bg-amber-50 text-xs font-medium dark:border-blueish-700 dark:bg-blueish-900/90",
                 "md:size-auto md:h-auto md:w-full md:min-h-0 md:aspect-square",
                 cell === 0
-                  ? "hover:bg-amber-100 active:bg-amber-200 dark:hover:bg-mizuno-800 dark:active:bg-mizuno-800"
+                  ? "hover:bg-amber-100 active:bg-amber-200 dark:hover:bg-blueish-800 dark:active:bg-blueish-800"
                   : "cursor-default",
               ].join(" ")}
               aria-label={
@@ -173,32 +173,32 @@ export function GomokuPage() {
 
   return (
     <article>
-      <nav aria-label="Breadcrumb" className="mb-4 font-sans text-sm text-mizuno-600 dark:text-mizuno-400">
+      <nav aria-label="Breadcrumb" className="mb-4 font-sans text-sm text-blueish-600 dark:text-blueish-400">
         <Link
           to="/fun"
-          className="underline underline-offset-2 hover:text-mizuno-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:hover:text-mizuno-200"
+          className="underline underline-offset-2 hover:text-blueish-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:hover:text-blueish-200"
         >
           Fun
         </Link>
         <span aria-hidden="true"> / </span>
         <Link
           to="/fun/games"
-          className="underline underline-offset-2 hover:text-mizuno-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:hover:text-mizuno-200"
+          className="underline underline-offset-2 hover:text-blueish-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:hover:text-blueish-200"
         >
           Games
         </Link>
         <span aria-hidden="true"> / </span>
-        <span className="text-mizuno-800 dark:text-mizuno-200">Gomoku</span>
+        <span className="text-blueish-800 dark:text-blueish-200">Gomoku</span>
       </nav>
 
-      <h1 className="mb-2 text-3xl font-semibold text-mizuno-900 dark:text-mizuno-50">
+      <h1 className="mb-2 text-3xl font-semibold text-blueish-900 dark:text-blueish-50">
         Gomoku (五子棋)
       </h1>
-      <p className="mb-4 text-mizuno-800 dark:text-mizuno-200">
+      <p className="mb-4 text-blueish-800 dark:text-blueish-200">
         Two players on one device. Black moves first. First to align five stones
         horizontally, vertically, or diagonally wins.
       </p>
-      <p className="mb-3 font-sans text-xs text-mizuno-600 md:hidden dark:text-mizuno-400">
+      <p className="mb-3 font-sans text-xs text-blueish-600 md:hidden dark:text-blueish-400">
         On small screens, scroll sideways — each cell stays finger-sized. Pinch
         with two fingers on the board to zoom the board only (not the whole
         page).
@@ -206,7 +206,7 @@ export function GomokuPage() {
 
       <div className="mb-4 flex flex-wrap items-center gap-3">
         <p
-          className="font-sans text-sm font-medium text-mizuno-900 dark:text-mizuno-100"
+          className="font-sans text-sm font-medium text-blueish-900 dark:text-blueish-100"
           role="status"
           aria-live="polite"
         >
@@ -216,7 +216,7 @@ export function GomokuPage() {
           type="button"
           onClick={undo}
           disabled={moves.length === 0}
-          className="min-h-[44px] min-w-[44px] touch-manipulation rounded border border-mizuno-400 bg-white px-3 py-1.5 font-sans text-sm text-mizuno-900 shadow-sm hover:bg-mizuno-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 disabled:cursor-not-allowed disabled:opacity-50 dark:border-mizuno-600 dark:bg-mizuno-900 dark:text-mizuno-50 dark:hover:bg-mizuno-800 md:min-h-0 md:min-w-0"
+          className="min-h-[44px] min-w-[44px] touch-manipulation rounded border border-blueish-400 bg-white px-3 py-1.5 font-sans text-sm text-blueish-900 shadow-sm hover:bg-blueish-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 disabled:cursor-not-allowed disabled:opacity-50 dark:border-blueish-600 dark:bg-blueish-900 dark:text-blueish-50 dark:hover:bg-blueish-800 md:min-h-0 md:min-w-0"
           aria-label="Undo last move"
         >
           Undo
@@ -224,7 +224,7 @@ export function GomokuPage() {
         <button
           type="button"
           onClick={reset}
-          className="min-h-[44px] min-w-[44px] touch-manipulation rounded border border-mizuno-400 bg-white px-3 py-1.5 font-sans text-sm text-mizuno-900 shadow-sm hover:bg-mizuno-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:border-mizuno-600 dark:bg-mizuno-900 dark:text-mizuno-50 dark:hover:bg-mizuno-800 md:min-h-0 md:min-w-0"
+          className="min-h-[44px] min-w-[44px] touch-manipulation rounded border border-blueish-400 bg-white px-3 py-1.5 font-sans text-sm text-blueish-900 shadow-sm hover:bg-blueish-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:border-blueish-600 dark:bg-blueish-900 dark:text-blueish-50 dark:hover:bg-blueish-800 md:min-h-0 md:min-w-0"
         >
           New game
         </button>
@@ -233,7 +233,7 @@ export function GomokuPage() {
             type="button"
             onClick={resetZoom}
             disabled={scale === 1}
-            className="min-h-[44px] touch-manipulation rounded border border-mizuno-400 bg-white px-3 py-1.5 font-sans text-sm text-mizuno-900 shadow-sm hover:bg-mizuno-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 disabled:cursor-not-allowed disabled:opacity-50 dark:border-mizuno-600 dark:bg-mizuno-900 dark:text-mizuno-50 dark:hover:bg-mizuno-800 md:min-h-0"
+            className="min-h-[44px] touch-manipulation rounded border border-blueish-400 bg-white px-3 py-1.5 font-sans text-sm text-blueish-900 shadow-sm hover:bg-blueish-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 disabled:cursor-not-allowed disabled:opacity-50 dark:border-blueish-600 dark:bg-blueish-900 dark:text-blueish-50 dark:hover:bg-blueish-800 md:min-h-0"
             aria-label="Reset board zoom to 100 percent"
           >
             Reset zoom
@@ -251,9 +251,9 @@ export function GomokuPage() {
         )}
       </div>
 
-      <p className="mt-4 font-sans text-sm text-mizuno-600 dark:text-mizuno-400">
+      <p className="mt-4 font-sans text-sm text-blueish-600 dark:text-blueish-400">
         Board size: {BOARD_SIZE}×{BOARD_SIZE}. Purely local — no network play.{" "}
-        <span className="text-mizuno-700 dark:text-mizuno-300">Undo</span>{" "}
+        <span className="text-blueish-700 dark:text-blueish-300">Undo</span>{" "}
         removes the last stone (one step).
       </p>
     </article>

@@ -8,11 +8,11 @@ export function Logo({ className = "", variant = "default" }: LogoProps) {
   const tile =
     variant === "onBrand"
       ? "fill-white"
-      : "fill-mizuno-100 dark:fill-mizuno-800";
+      : "fill-blueish-100 dark:fill-blueish-800";
   const mark =
     variant === "onBrand"
-      ? "fill-mizuno-600"
-      : "fill-mizuno-600 dark:fill-mizuno-200";
+      ? "fill-blueish-600"
+      : "fill-blueish-600 dark:fill-blueish-200";
 
   return (
     <svg

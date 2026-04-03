@@ -17,7 +17,7 @@ export function CategoryPage() {
         <p className="mt-4">
           <Link
             to="/blog"
-            className="text-mizuno-700 underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-200"
+            className="text-blueish-700 underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:text-blueish-200"
           >
             Back to blog
           </Link>
@@ -28,18 +28,18 @@ export function CategoryPage() {
 
   return (
     <article>
-      <h1 className="mb-2 text-3xl font-semibold text-mizuno-900 dark:text-mizuno-50">Category: {name}</h1>
-      <p className="mb-8 font-sans text-sm text-mizuno-600 dark:text-mizuno-400">{posts.length} post(s)</p>
+      <h1 className="mb-2 text-3xl font-semibold text-blueish-900 dark:text-blueish-50">Category: {name}</h1>
+      <p className="mb-8 font-sans text-sm text-blueish-600 dark:text-blueish-400">{posts.length} post(s)</p>
       <ul className="space-y-4">
         {posts.map((p) => (
           <li key={p.slug}>
             <Link
               to={`/blog/${p.slug}`}
-              className="text-lg font-medium text-mizuno-800 underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-100"
+              className="text-lg font-medium text-blueish-800 underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:text-blueish-100"
             >
               {p.title}
             </Link>
-            <p className="font-sans text-sm text-mizuno-600 dark:text-mizuno-400">{p.date}</p>
+            <p className="font-sans text-sm text-blueish-600 dark:text-blueish-400">{p.date}</p>
           </li>
         ))}
       </ul>

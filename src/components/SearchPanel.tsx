@@ -46,20 +46,20 @@ export function SearchPanel({ open, onClose }: SearchPanelProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-mizuno-900/40 p-4 pt-[12vh] dark:bg-black/60"
+      className="fixed inset-0 z-50 flex items-start justify-center bg-blueish-900/40 p-4 pt-[12vh] dark:bg-black/60"
       role="dialog"
       aria-modal="true"
       aria-labelledby="search-dialog-title"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg rounded-lg border border-mizuno-200 bg-white p-4 shadow-xl dark:border-mizuno-700 dark:bg-mizuno-800"
+        className="w-full max-w-lg rounded-lg border border-blueish-200 bg-white p-4 shadow-xl dark:border-blueish-700 dark:bg-blueish-800"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 id="search-dialog-title" className="sr-only">
           Search posts
         </h2>
-        <label htmlFor="site-search-input" className="mb-2 block text-sm font-sans text-mizuno-700 dark:text-mizuno-200">
+        <label htmlFor="site-search-input" className="mb-2 block text-sm font-sans text-blueish-700 dark:text-blueish-200">
           Search
         </label>
         <input
@@ -68,29 +68,29 @@ export function SearchPanel({ open, onClose }: SearchPanelProps) {
           autoFocus
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="mb-4 w-full rounded border border-mizuno-200 bg-white px-3 py-2 font-sans text-mizuno-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:border-mizuno-600 dark:bg-mizuno-900 dark:text-mizuno-50"
+          className="mb-4 w-full rounded border border-blueish-200 bg-white px-3 py-2 font-sans text-blueish-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:border-blueish-600 dark:bg-blueish-900 dark:text-blueish-50"
           placeholder="Title or content…"
           autoComplete="off"
         />
         <ul className="max-h-[50vh] overflow-y-auto font-sans text-sm">
           {results.length === 0 ? (
-            <li className="text-mizuno-700 dark:text-mizuno-300">No matches.</li>
+            <li className="text-blueish-700 dark:text-blueish-300">No matches.</li>
           ) : (
             results.map((p) => (
-              <li key={p.slug} className="border-b border-mizuno-100 py-2 last:border-0 dark:border-mizuno-700">
+              <li key={p.slug} className="border-b border-blueish-100 py-2 last:border-0 dark:border-blueish-700">
                 <Link
                   to={`/blog/${p.slug}`}
-                  className="font-medium text-mizuno-700 underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:text-mizuno-100"
+                  className="font-medium text-blueish-700 underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:text-blueish-100"
                   onClick={onClose}
                 >
                   {p.title}
                 </Link>
-                <div className="mt-0.5 text-xs text-mizuno-600 dark:text-mizuno-300">
+                <div className="mt-0.5 text-xs text-blueish-600 dark:text-blueish-300">
                   {p.date}{" "}
                   ·{" "}
                   <Link
                     to={`/blog/category/${slugify(p.category)}`}
-                    className="underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-mizuno-600"
+                    className="underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-blueish-600"
                     onClick={onClose}
                   >
                     {p.category}
@@ -102,7 +102,7 @@ export function SearchPanel({ open, onClose }: SearchPanelProps) {
         </ul>
         <button
           type="button"
-          className="mt-4 w-full rounded border border-mizuno-200 px-3 py-2 font-sans text-sm text-mizuno-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mizuno-600 dark:border-mizuno-600 dark:text-mizuno-100"
+          className="mt-4 w-full rounded border border-blueish-200 px-3 py-2 font-sans text-sm text-blueish-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blueish-600 dark:border-blueish-600 dark:text-blueish-100"
           onClick={onClose}
         >
           Close
