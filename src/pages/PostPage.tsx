@@ -71,6 +71,13 @@ export function PostPage() {
                 {children}
               </a>
             ),
+            table: ({ children, ...props }) => (
+              <div className="my-4 overflow-x-auto">
+                <table className="min-w-[640px]" {...props}>
+                  {children}
+                </table>
+              </div>
+            ),
           }}
         >
           {post.body}

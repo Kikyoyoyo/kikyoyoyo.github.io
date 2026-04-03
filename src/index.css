@@ -73,7 +73,7 @@
   @apply bg-transparent p-0;
 }
 .prose-blueish table {
-  @apply my-4 w-full border-collapse border border-blueish-200 dark:border-blueish-600;
+  @apply w-full border-collapse border border-blueish-200 dark:border-blueish-600;
 }
 .prose-blueish th,
 .prose-blueish td {
