@@ -26,7 +26,7 @@ export function blueishThemePlugin(): Plugin {
           return;
         }
         let body = "";
-        req.on("data", (c) => {
+        req.on("data", (c: Buffer | string) => {
           body += typeof c === "string" ? c : c.toString("utf8");
         });
         req.on("end", () => {
