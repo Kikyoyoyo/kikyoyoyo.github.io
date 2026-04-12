@@ -1,18 +1,14 @@
 type LogoProps = {
   className?: string;
-  /** White tile + brand-blue K on the deep-blue nav bar; default is for light page backgrounds */
+  /** 
+   * default: Ethereum-style diamond (glyph) with brand colors
+   * onBrand: White/Light version for dark backgrounds
+   */
   variant?: "default" | "onBrand";
 };
 
 export function Logo({ className = "", variant = "default" }: LogoProps) {
-  const tile =
-    variant === "onBrand"
-      ? "fill-white"
-      : "fill-mizuno-100 dark:fill-mizuno-800";
-  const mark =
-    variant === "onBrand"
-      ? "fill-mizuno-600"
-      : "fill-mizuno-600 dark:fill-mizuno-200";
+  const tileClass = variant === "onBrand" ? "fill-eth-purple-dark" : "fill-eth-purple";
 
   return (
     <svg
@@ -21,13 +17,15 @@ export function Logo({ className = "", variant = "default" }: LogoProps) {
       width={32}
       height={32}
       role="img"
-      aria-hidden="true"
+      aria-label="K Logo"
     >
-      <rect width="32" height="32" rx="6" className={tile} />
-      {/* Vertical stem + two triangles sharing one joint at (12,16) — reads as K */}
+      {/* Violet/Purple background square with rounded corners */}
+      <rect width="32" height="32" rx="8" className={tileClass} />
+      
+      {/* White 'K' letter */}
       <path
-        className={mark}
-        d="M8 8h4v16H8V8zM12 8L24 8 12 16zM12 16L24 24 12 24z"
+        d="M9 7h3v18H9V7zm3 9l8-9h4l-9 9 10 9h-4l-9-9z"
+        fill="white"
       />
     </svg>
   );

@@ -6,12 +6,10 @@ import { PostPage } from "./pages/PostPage";
 import { ArchivePage } from "./pages/ArchivePage";
 import { CategoryPage } from "./pages/CategoryPage";
 import { TagPage } from "./pages/TagPage";
-import { ProjectsPage } from "./pages/ProjectsPage";
 import { FunPage } from "./pages/FunPage";
 import { GamesPage } from "./pages/GamesPage";
 import { GomokuPage } from "./pages/GomokuPage";
-import { ToolsPage } from "./pages/ToolsPage";
-import { LocalFileTransferPage } from "./pages/LocalFileTransferPage";
+import { SandSimPage } from "./pages/SandSimPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
 export function App() {
@@ -24,12 +22,10 @@ export function App() {
         <Route path="/blog/category/:categorySlug" element={<CategoryPage />} />
         <Route path="/blog/tag/:tagSlug" element={<TagPage />} />
         <Route path="/blog/:slug" element={<PostPage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/fun" element={<FunPage />} />
         <Route path="/fun/games" element={<GamesPage />} />
         <Route path="/fun/games/gomoku" element={<GomokuPage />} />
-        <Route path="/fun/tools" element={<ToolsPage />} />
-        <Route path="/fun/tools/local-file-transfer" element={<LocalFileTransferPage />} />
+        <Route path="/fun/games/sand" element={<SandSimPage />} />
         <Route path="/badminton" element={<Navigate to="/fun" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

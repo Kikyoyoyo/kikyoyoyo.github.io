@@ -18,10 +18,10 @@ export class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <main className="mx-auto max-w-3xl px-4 py-10 font-serif text-mizuno-900 dark:text-mizuno-50">
+        <main className="mx-auto max-w-3xl px-4 py-10 font-serif text-blueish-900 dark:text-blueish-50">
           <h1 className="mb-4 text-2xl font-semibold">Something went wrong</h1>
-          <p className="mb-4 font-mono text-sm text-mizuno-700 dark:text-mizuno-300">{this.state.message}</p>
-          <p className="text-mizuno-800 dark:text-mizuno-200">
+          <p className="mb-4 font-mono text-sm text-blueish-700 dark:text-blueish-300">{this.state.message}</p>
+          <p className="text-blueish-800 dark:text-blueish-200">
             Try a hard refresh. If this persists, open the browser console (F12) and report the error.
           </p>
         </main>
